@@ -1,59 +1,58 @@
 module.exports = [
   {
-    name: "Someone",
+    name: "Kyaw Kyaw",
+    id: Math.random() * 100,
     township: "Yankin",
     phoneNumber: "09-2322342",
     availableShops: [
       {
-        name: "Pizza ",
+        name: "Pizza Hut (8 miles)",
+        detail: "Some random (optional)",
       },
       {
-        name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
+        name: "Chilli Pot (ho narr)",
       },
     ],
   },
   {
-    name: "Someone",
-    township: "Yankin",
+    name: "Mg Mg",
+    township: "Mayangone",
+    id: Math.random() * 100,
     phoneNumber: "09-2322342",
     availableShops: [
       {
-        name: "Chilli Pot",
+        name: "asdf (some random shops)",
+        detail: "Home made breads and dan pout",
       },
       {
-        name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
+        name: "Chilli Pot (ho narr)",
       },
     ],
   },
   {
-    name: "Someone",
-    township: "Yankin",
+    name: "Ko Ko",
+    id: Math.random() * 100,
+    township: "Dagon",
     phoneNumber: "09-2322342",
     availableShops: [
       {
         name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
+        detail: "Cannot do a lot of biking",
       },
     ],
   },
   {
-    name: "Someone",
-    township: "Yankin",
+    name: "Sam",
+    id: Math.random() * 100,
+    township: "North Dagon",
     phoneNumber: "09-2322342",
     availableShops: [
       {
         name: "Chilli Pot",
+      },
+      {
+        name: "Chilli Pot",
+        description: "good place",
       },
       {
         name: "Chilli Pot",

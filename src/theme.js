@@ -3,6 +3,9 @@ import { createMuiTheme } from "@material-ui/core";
 const theme = createMuiTheme({
   typography: {
     fontFamily: "Baloo 2",
+    body2: {
+      fontSize: 20,
+    },
   },
   palette: {
     primary: {

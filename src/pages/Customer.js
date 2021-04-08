@@ -1,42 +1,62 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import { useEffect, useState } from "react";
+import PersonCard from "../components/PersonCard";
 import data from "../data";
-console.log(data);
+
 const useStyle = makeStyles({
-  personContainer: {
-    border: "1px solid",
-    padding: "1rem",
-    marginBottom: "1rem",
+  bodyContainer: {
+    marginTop: "1.5rem",
   },
   container: {
-    marginTop: "2rem",
+    marginTop: "0.5rem",
+  },
+  input: {
+    marginTop: "1rem",
   },
 });
 
 const Customer = () => {
   const classes = useStyle();
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {}, [query]);
+
   return (
-    <Box>
-      <Typography variant="h4">
-        Customer can browse all the riders near to their location and see their
-        shops and restaurants to which riders are ok to go
-      </Typography>
-      <Grid container spacing={2} className={classes.container}>
-        {data.map((item, i) => (
-          <Grid item sm={12} md={6} lg={4} key={i}>
-            <Box component="div" className={classes.personContainer} key={i}>
-              <Typography variant="h4">{item.name}</Typography>
-              <Typography variant="h4">{item.name}</Typography>
-              <Typography>Shops available for this person</Typography>
-              {item.availableShops.map((shop, i) => (
-                <Typography key={i}>{shop.name}</Typography>
-              ))}
-              <Typography variant="h6" color="secondary">
-                {item.phoneNumber}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
+    <Box component="div" className={classes.container}>
+      <Typography variant="h4">Select your location!</Typography>
+      <TextField
+        fullWidth
+        variant="outlined"
+        className={classes.input}
+        label="Search in your township!"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <Grid container spacing={2} className={classes.bodyContainer}>
+        {data
+          // eslint-disable-next-line
+          .filter((person) => {
+            if (query === "") return person;
+            else if (person.township.toLowerCase().includes(query))
+              return person;
+          })
+          .map((person, i) => (
+            <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
+              <PersonCard person={person} />
+            </Grid>
+          ))}
       </Grid>
+      {query ? (
+        <Typography align="center" variant="h6" className={classes.input}>
+          <strong>No other users found near you :(</strong>
+        </Typography>
+      ) : null}
     </Box>
   );
 };
