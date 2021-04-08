@@ -1,11 +1,18 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import Home from "./components/Home";
+import Home from "./pages/Home";
+import Wrapper from "./wrapper/Wrapper";
+import Rider from "./pages/Rider";
+import Customer from "./pages/Customer";
 
 const App = () => {
   return (
     <Switch>
-      <Route route="/" component={Home} />
+      <Wrapper>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/rider" component={Rider} />
+        <Route exact path="/customer" component={Customer} />
+      </Wrapper>
     </Switch>
   );
 };
