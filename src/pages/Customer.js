@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PersonCard from "../components/PersonCard";
 import data from "../data";
 
@@ -24,8 +24,6 @@ const useStyle = makeStyles({
 const Customer = () => {
   const classes = useStyle();
   const [query, setQuery] = useState("");
-
-  useEffect(() => {}, [query]);
 
   return (
     <Box component="div" className={classes.container}>
