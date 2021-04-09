@@ -6,6 +6,7 @@ import Rider from "./pages/Rider";
 import Customer from "./pages/Customer";
 import RiderDetail from "./pages/RiderDetail";
 import SignupRider from "./SignupRider/SignupRider";
+import SignupSuccess from "./SignupRider/SignupSuccess";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path="/customer" component={Customer} />
         <Route exact path="/info/:id" component={RiderDetail} />
         <Route exact path="/rider/signup" component={SignupRider} />
+        <Route exact path="/rider/signup/:id" component={SignupSuccess} />
       </Wrapper>
     </Switch>
   );

@@ -1,7 +1,7 @@
 module.exports = [
   {
     name: "Kyaw Kyaw",
-    id: Math.random() * 100,
+    uniqueId: Math.random() * 100,
     township: "Yankin",
     phoneNumber: "09-2322342",
     availableShops: [
@@ -17,7 +17,7 @@ module.exports = [
   {
     name: "Mg Mg",
     township: "Mayangone",
-    id: Math.random() * 100,
+    uniqueId: Math.random() * 100,
     phoneNumber: "09-2322342",
     availableShops: [
       {
@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     name: "Ko Ko",
-    id: Math.random() * 100,
+    uniqueId: Math.random() * 100,
     township: "Dagon",
     phoneNumber: "09-2322342",
     availableShops: [
@@ -43,7 +43,7 @@ module.exports = [
   },
   {
     name: "Sam",
-    id: Math.random() * 100,
+    uniqueId: Math.random() * 100,
     township: "North Dagon",
     phoneNumber: "09-2322342",
     availableShops: [

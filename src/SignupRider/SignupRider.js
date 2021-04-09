@@ -10,6 +10,10 @@ import { Formik } from "formik";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import townships from "./townships.js";
 import { useState } from "react";
+import axios from "../api/index";
+import Spinner from "../utils/Spinner/Spinner";
+import { Alert } from "@material-ui/lab";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -25,9 +29,12 @@ const useStyle = makeStyles((theme) => ({
 
 const SignupRider = () => {
   const classes = useStyle();
+  const history = useHistory();
   const [shopName, setShopName] = useState("");
   const [shopDescription, setShopDescription] = useState("");
   const [shops, setShops] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const addNewShopHandler = (e) => {
     e.preventDefault();
@@ -50,16 +57,27 @@ const SignupRider = () => {
     <Box component="div" className={classes.container}>
       <Typography variant="h5">Create a new rider profile!</Typography>
       <Formik
+        enableReinitialize={true}
         initialValues={{
           name: "",
           township: "",
           phoneNumber: "",
           availableShops: [],
         }}
-        onSubmit={async ({ name, township, phoneNumber, availableShops }) => {
+        onSubmit={async (
+          { name, township, phoneNumber, availableShops },
+          { resetForm }
+        ) => {
+          setLoading(true);
           availableShops = shops;
           const payload = { name, township, availableShops, phoneNumber };
-          console.log(payload);
+          await axios.post("/api/rider", payload).then((response) => {
+            console.log(response);
+            setLoading(false);
+            setSuccess(true);
+            resetForm();
+            history.push(`/rider/signup/${response.data.id}`);
+          });
         }}
       >
         {({
@@ -69,7 +87,6 @@ const SignupRider = () => {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
@@ -113,7 +130,9 @@ const SignupRider = () => {
             </Typography>
             {shops.map((shop, i) => (
               <Chip
+                color="secondary"
                 key={i}
+                variant="outlined"
                 label={shop.name}
                 onDelete={handleDelete(shop)}
                 className={classes.chip}
@@ -147,6 +166,14 @@ const SignupRider = () => {
             >
               Add shop
             </Button>
+            {loading ? <Spinner /> : null}
+            {success ? (
+              <Alert severity="success" className={classes.input}>
+                <strong style={{ color: "green" }}>
+                  Successfully Signed up!
+                </strong>
+              </Alert>
+            ) : null}
             <Button
               type="submit"
               fullWidth

@@ -33,7 +33,7 @@ const PersonCard = ({ person }) => {
     <Card
       className={classes.personContainer}
       onClick={() => {
-        history.push(`/info/${person.id}`);
+        history.push(`/info/${person.uniqueId}`);
       }}
     >
       <Typography variant="h5">{person.name}</Typography>
