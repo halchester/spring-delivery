@@ -72,7 +72,6 @@ const SignupRider = () => {
           availableShops = shops;
           const payload = { name, township, availableShops, phoneNumber };
           await axios.post("/api/rider", payload).then((response) => {
-            console.log(response);
             setLoading(false);
             setSuccess(true);
             resetForm();
@@ -103,9 +102,8 @@ const SignupRider = () => {
               name="township"
               options={townships}
               className={classes.input}
-              getOptionLabel={(option) => option.township_mm}
-              onChange={(e, newValue) => {
-                setFieldValue("township", newValue.township);
+              onChange={(e, newValue, reason) => {
+                setFieldValue("township", newValue);
               }}
               renderInput={(params) => (
                 <TextField

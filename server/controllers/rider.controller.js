@@ -11,31 +11,8 @@ exports.registerNewRider = async (req, res) => {
       .json({ success: true, data: newRider, id: newRider.uniqueId });
   } catch (err) {
     console.log(err);
-    return res.status(200).json({ success: false, data: {} });
+    return res.status(500).json({ success: false, data: {} });
   }
-};
-
-exports.getOneRider = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
-  await Rider.findOne({ uniqueId: id })
-    .then((response) => {
-      console.log(response);
-      return res.status(200).json({ success: true, data: response });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json({ success: false, err: err });
-    });
-  // try {
-  //   await Rider.findOne({ uniqueId: id }).then((response) => {
-  //     console.log(response);
-  //     return res.status(200).json({ success: true, data: response });
-  //   });
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(400).json({ success: false, err: err });
-  // }
 };
 
 exports.getAllRiders = async (req, res) => {
@@ -43,8 +20,17 @@ exports.getAllRiders = async (req, res) => {
     .sort({ createdAt: -1 })
     .then((response) => res.status(200).json({ success: true, data: response }))
     .catch((err) => {
-      res.status(400).json({ success: false, data: err });
+      res.status(400).json({ success: false, data: {} });
     });
+};
+
+exports.getOneRider = async (req, res) => {
+  const { id } = req.params;
+  const rider = Rider.findOne({ uniqueId: id })
+    .then((data) => {
+      res.status(200).json({ success: true, data: data });
+    })
+    .catch((err) => res.status(400).json({ success: false, data: err }));
 };
 
 exports.deleteRider = async (req, res) => {

@@ -9,7 +9,6 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router";
 import axios from "../api/index";
-import PersonCard from "../components/PersonCard";
 import Spinner from "../utils/Spinner/Spinner";
 
 // TODOS:
@@ -34,22 +33,20 @@ const Rider = () => {
   const [found, setFound] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({});
-  console.log(data);
   const history = useHistory();
 
   const searchUser = (id) => {
     setLoading(true);
-    axios.get(`/api/rider/${id}`).then((response) => console.log(response));
-    // .then((response) => {
-    //   setFound(true);
-    //   setLoading(false);
-    //   console.log(response.data.data);
-    //   setData(response.data.data);
-    // })
-    // .catch((err) => {
-    //   setLoading(false);
-    //   setFound(false);
-    // });
+    axios.get(`/api/rider/${id}`).then((response) => {
+      if (response.data.data === null) {
+        setLoading(false);
+        setFound(false);
+      } else {
+        setFound(true);
+        setLoading(false);
+        setData(response.data.data);
+      }
+    });
   };
   return (
     <Box component="div" className={classes.container}>
@@ -84,7 +81,12 @@ const Rider = () => {
           <Card style={{ padding: "0.5rem" }}>
             <Typography variant="h6">{data.name}</Typography>
             <Typography variant="h6">{data.phoneNumber}</Typography>
-            <Button variant="outlined" color="secondary" size="small">
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={() => history.push(`/rider/edit/${data.uniqueId}`)}
+            >
               Edit Profile
             </Button>
             <Button
