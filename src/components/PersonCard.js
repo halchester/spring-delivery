@@ -29,7 +29,8 @@ const useStyle = makeStyles({
 const PersonCard = ({ person }) => {
   const classes = useStyle();
   const history = useHistory();
-  return (
+  
+  return person ? (
     <Card
       className={classes.personContainer}
       onClick={() => {
@@ -60,7 +61,7 @@ const PersonCard = ({ person }) => {
         {person.phoneNumber}
       </Typography> */}
     </Card>
-  );
+  ) : null;
 };
 
 export default PersonCard;

@@ -6,8 +6,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import { getAllRiders } from "../api/query";
 import PersonCard from "../components/PersonCard";
-import data from "../data";
+import Spinner from "../utils/Spinner/Spinner";
 
 const useStyle = makeStyles({
   bodyContainer: {
@@ -24,8 +26,9 @@ const useStyle = makeStyles({
 const Customer = () => {
   const classes = useStyle();
   const [query, setQuery] = useState("");
+  const { status, data } = useQuery("getAllRiders", getAllRiders);
 
-  return (
+  return status === "success" ? (
     <Box component="div" className={classes.container}>
       <Typography variant="h4">Select your location!</Typography>
       <TextField
@@ -56,6 +59,8 @@ const Customer = () => {
         </Typography>
       ) : null}
     </Box>
+  ) : (
+    <Spinner />
   );
 };
 

@@ -1,3 +1,6 @@
+// all are dummy data and for the purpose of testing
+// data structures are the same with data from mongo database
+
 module.exports = [
   {
     name: "Kyaw Kyaw",

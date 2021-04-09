@@ -14,3 +14,57 @@ exports.registerNewRider = async (req, res) => {
     return res.status(200).json({ success: false, data: {} });
   }
 };
+
+exports.getOneRider = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  await Rider.findOne({ uniqueId: id })
+    .then((response) => {
+      console.log(response);
+      return res.status(200).json({ success: true, data: response });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ success: false, err: err });
+    });
+  // try {
+  //   await Rider.findOne({ uniqueId: id }).then((response) => {
+  //     console.log(response);
+  //     return res.status(200).json({ success: true, data: response });
+  //   });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(400).json({ success: false, err: err });
+  // }
+};
+
+exports.getAllRiders = async (req, res) => {
+  await Rider.find()
+    .sort({ createdAt: -1 })
+    .then((response) => res.status(200).json({ success: true, data: response }))
+    .catch((err) => {
+      res.status(400).json({ success: false, data: err });
+    });
+};
+
+exports.deleteRider = async (req, res) => {
+  const { id } = req.params;
+  await Rider.findOneAndDelete({ uniqueId: id })
+    .then((response) => res.status(200).json({ success: true, data: response }))
+    .catch((err) => res.status(200).json({ success: false, data: err }));
+};
+
+exports.editRider = async (req, res) => {
+  const { uniqueId } = req.body;
+  await Rider.updateOne(
+    { uniqueId: uniqueId },
+    {
+      $set: { ...req.body },
+    },
+    { new: true }
+  )
+    .then((data) => {
+      return res.status(200).json({ success: true, data: data });
+    })
+    .catch((err) => res.status(200).json({ success: false, data: err }));
+};
