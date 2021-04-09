@@ -27,7 +27,7 @@ const Home = () => {
       </Typography>
       <Box className={classes.chooseContainer}>
         <Button
-          variant="outlined"
+          variant="contained"
           className={classes.button}
           color="secondary"
           fullWidth
@@ -36,7 +36,7 @@ const Home = () => {
           Rider
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           className={classes.button}
           color="secondary"
           fullWidth
