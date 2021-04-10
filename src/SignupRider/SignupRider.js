@@ -188,6 +188,7 @@ const SignupRider = () => {
               type="submit"
               fullWidth
               onClick={handleSubmit}
+              disabled={shops.length === 0}
               color="secondary"
               variant="contained"
               className={classes.input}
