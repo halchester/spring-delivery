@@ -8,6 +8,7 @@ import RiderDetail from "./pages/RiderDetail";
 import SignupRider from "./SignupRider/SignupRider";
 import SignupSuccess from "./SignupRider/SignupSuccess";
 import RiderEdit from "./pages/RiderEdit";
+import About from "./pages/About";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/rider/signup" component={SignupRider} />
         <Route exact path="/rider/signup/:id" component={SignupSuccess} />
         <Route exact path="/rider/edit/:id" component={RiderEdit} />
+        <Route exact path="/about" component={About} />
       </Wrapper>
     </Switch>
   );

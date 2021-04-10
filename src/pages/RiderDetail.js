@@ -32,18 +32,20 @@ const RiderDetail = (props) => {
       <Typography variant="body2" align="center" gutterBottom>
         <strong>Available for delivery &nbsp; &#8595; </strong>
       </Typography>
-      <Grid container spacing={3}>
-        {data.availableShops.map((shop, i) => (
-          <Grid item key={i} xs={12} sm={6} md={6}>
-            <Card className={classes.cardContainer}>
-              <Typography variant="h6" gutterBottom>
-                <strong>{shop.name}</strong>
-              </Typography>
-              <Typography variant="body1">{shop.detail}</Typography>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Box>
+        <Grid container spacing={2}>
+          {data.availableShops.map((shop, i) => (
+            <Grid item xs={12} sm={6} md={6} lg={4} key={i}>
+              <Card className={classes.cardContainer}>
+                <Typography variant="h6" gutterBottom>
+                  <strong>{shop.name}</strong>
+                </Typography>
+                <Typography>{shop.detail}</Typography>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   ) : (
     <Spinner />
