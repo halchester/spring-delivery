@@ -55,6 +55,7 @@ const RiderEdit = (props) => {
     if (status === "success") {
       setShops(data.availableShops);
     }
+    // eslint-disable-next-line
   }, [status]);
 
   console.log(shops);
