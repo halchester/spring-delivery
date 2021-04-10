@@ -1,16 +1,26 @@
-import { Box, Card, Grid, makeStyles, Typography } from "@material-ui/core";
+import {
+  Box,
+  Card,
+  Chip,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { useQuery } from "react-query";
 import { getOneRider } from "../api/query";
 import Spinner from "../utils/Spinner/Spinner";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   container: {
     marginTop: "2rem",
   },
   cardContainer: {
     padding: "0.5rem",
   },
-});
+  chip: {
+    margin: theme.spacing(0.3),
+  },
+}));
 
 const RiderDetail = (props) => {
   const id = props.match.params.id;
@@ -19,15 +29,23 @@ const RiderDetail = (props) => {
 
   return status === "success" ? (
     <Box className={classes.container}>
-      <Typography variant="h4" gutterBottom>
-        {data.name}
-      </Typography>
-      <Typography variant="h5">
-        <strong>{data.township}</strong>
-      </Typography>
+      <Typography variant="h4">{data.name}</Typography>
       <Typography variant="h5" gutterBottom color="secondary">
         <strong>{data.phoneNumber}</strong>
       </Typography>
+      <Typography variant="h5">
+        <strong>
+          {data.township.map((item) => (
+            <Chip
+              label={item}
+              className={classes.chip}
+              color="secondary"
+              variant="outlined"
+            />
+          ))}
+        </strong>
+      </Typography>
+
       <hr />
       <Typography variant="body2" align="center" gutterBottom>
         <strong>Available for delivery &nbsp; &#8595; </strong>

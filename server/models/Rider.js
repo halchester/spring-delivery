@@ -11,7 +11,7 @@ const RiderModel = mongoose.Schema({
     type: String,
   },
   township: {
-    type: String,
+    type: Schema.Types.Array,
     required: true,
   },
   phoneNumber: {

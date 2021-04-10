@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Formik } from "formik";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import townships from "./townships.js";
+import townshipData from "./townships.js";
 import { useState } from "react";
 import axios from "../api/index";
 import Spinner from "../utils/Spinner/Spinner";
@@ -36,6 +36,8 @@ const SignupRider = () => {
   const [shops, setShops] = useState([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [townships, setTownships] = useState([]);
+  const [tsp, setTsp] = useState("");
 
   const addNewShopHandler = (e) => {
     e.preventDefault();
@@ -50,19 +52,31 @@ const SignupRider = () => {
     setShopDescription("");
   };
 
+  const addNewTownshipHandler = (e) => {
+    e.preventDefault();
+    setTownships((prevTsps) => [...prevTsps, tsp]);
+    setTsp("");
+  };
+
   const handleDelete = (shopToDelete) => () => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
   };
 
+  const handleDeleteTsp = (shopToDelete) => () => {
+    setTownships((shop) => shop.filter((shop) => shop !== shopToDelete));
+  };
+
   return (
     <Box component="div" className={classes.container}>
-      <Typography variant="h5">Create a new rider profile!</Typography>
+      <Typography variant="h5">
+        <strong>Create a new rider profile!</strong>
+      </Typography>
       <Formik
         validationSchema={riderSignUpValidation}
-        enableReinitialize={true}
+        // enableReinitialize={true}
         initialValues={{
           name: "",
-          township: "",
+          township: [],
           phoneNumber: "",
           availableShops: [],
         }}
@@ -71,6 +85,7 @@ const SignupRider = () => {
           { resetForm }
         ) => {
           setLoading(true);
+          township = townships;
           availableShops = shops;
           const payload = { name, township, availableShops, phoneNumber };
           await axios.post("/api/rider", payload).then((response) => {
@@ -88,7 +103,6 @@ const SignupRider = () => {
           handleChange,
           handleBlur,
           handleSubmit,
-          setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
             <TextField
@@ -103,25 +117,42 @@ const SignupRider = () => {
               helperText={errors.name}
               onBlur={handleBlur}
             />
+            <Typography className={classes.input} variant="h6">
+              Add delivery places for you
+            </Typography>
+            {townships.map((item, i) => (
+              <Chip
+                color="secondary"
+                key={i}
+                variant="outlined"
+                label={item}
+                onDelete={handleDeleteTsp(item)}
+                className={classes.chip}
+              />
+            ))}
             <Autocomplete
-              name="township"
-              options={townships}
-              className={classes.input}
-              onChange={(e, newValue, reason) => {
-                setFieldValue("township", newValue);
-              }}
-              onBlur={handleBlur}
+              value={tsp}
+              label="Townships"
+              options={townshipData}
+              fullWidth
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  label="Township"
-                  variant="outlined"
-                  error={touched && errors.township}
-                  helperText={errors.townships}
-                />
+                <TextField {...params} label="Townships" variant="outlined" />
               )}
+              onChange={(e, newValue) => {
+                e.preventDefault();
+                setTsp(newValue);
+              }}
+              className={classes.input}
             />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.input}
+              disabled={tsp.length === 0}
+              onClick={(e) => addNewTownshipHandler(e)}
+            >
+              Add Township
+            </Button>
             <TextField
               variant="outlined"
               name="phoneNumber"
@@ -188,7 +219,7 @@ const SignupRider = () => {
               type="submit"
               fullWidth
               onClick={handleSubmit}
-              disabled={shops.length === 0}
+              disabled={townships.length === 0 || shops.length === 0}
               color="secondary"
               variant="contained"
               className={classes.input}

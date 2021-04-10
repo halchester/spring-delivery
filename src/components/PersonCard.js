@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Card,
+  Chip,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -12,7 +13,7 @@ import React from "react";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import { useHistory } from "react-router";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   shopContainer: {
     padding: "0.3rem",
     backgroundColor: "#ddd",
@@ -24,12 +25,15 @@ const useStyle = makeStyles({
   foodListContainer: {
     margin: "0.5rem 0",
   },
-});
+  chip: {
+    margin: theme.spacing(0.3),
+  },
+}));
 
 const PersonCard = ({ person }) => {
   const classes = useStyle();
   const history = useHistory();
-  
+
   return person ? (
     <Card
       className={classes.personContainer}
@@ -39,7 +43,11 @@ const PersonCard = ({ person }) => {
     >
       <Typography variant="h5">{person.name}</Typography>
       <Typography variant="h5">
-        <strong>{person.township}</strong>
+        <strong>
+          {person.township.map((township) => (
+            <Chip label={township} className={classes.chip} color="secondary" />
+          ))}
+        </strong>
       </Typography>
       <hr />
       <Typography gutterBottom variant="body2">

@@ -199,6 +199,7 @@ const RiderEdit = (props) => {
             {loading ? <Spinner /> : null}
             <Button
               type="submit"
+              disabled={shops.length === 0}
               fullWidth
               onClick={handleSubmit}
               color="secondary"
