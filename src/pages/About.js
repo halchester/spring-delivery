@@ -10,7 +10,7 @@ const About = () => {
           <strong>Spring Snacks</strong>
         </Typography>
       </Typography>
-      <Typography>Burmese below</Typography>
+      <Typography variant="body2">Burmese below</Typography>
       <hr />
       <Typography>
         Spring Snacks is an app for the food delivery riders who are having
@@ -35,6 +35,18 @@ const About = () => {
         အကြံပေးချင်ပါတယ်ခင်ဗျ. Delivery fees ကိုတော့ စေတနာရှိသလောက်ပေးပေးပါ
         မပေးပဲတော့ မနေပါနဲ့ခင်ဗျာ
       </Typography>
+      <hr />
+      <Typography variant="h5" align="center">
+        <strong>Love my work?</strong>{" "}
+      </Typography>
+      <a
+        href="https://www.buymeacoffee.com/halchester"
+        style={{ textDecoration: "none" }}
+      >
+        <Typography variant="h6" color="secondary" align="center">
+          Buy me a coffee ☕️
+        </Typography>
+      </a>
     </Box>
   );
 };
