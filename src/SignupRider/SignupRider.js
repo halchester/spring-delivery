@@ -171,6 +171,7 @@ const SignupRider = () => {
               variant="contained"
               color="primary"
               className={classes.input}
+              disabled={shopName.length === 0}
               onClick={(e) => addNewShopHandler(e)}
             >
               Add shop

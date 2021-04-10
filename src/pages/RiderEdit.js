@@ -12,7 +12,7 @@ import Spinner from "../utils/Spinner/Spinner";
 import { Formik } from "formik";
 import { Autocomplete } from "@material-ui/lab";
 import townships from "../SignupRider/townships";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../api/index";
 import { useHistory } from "react-router";
 
@@ -51,6 +51,14 @@ const RiderEdit = (props) => {
     setShopDescription("");
   };
 
+  useEffect(() => {
+    if (status === "success") {
+      setShops(data.availableShops);
+    }
+  }, [status]);
+
+  console.log(shops);
+
   const handleDelete = (shopToDelete) => () => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
   };
@@ -64,12 +72,11 @@ const RiderEdit = (props) => {
         initialValues={data}
         onSubmit={(values) => {
           setLoading(true);
-          const newShops = values.availableShops.concat(shops);
           const payload = {
             name: values.name,
             phoneNumber: values.phoneNumber,
             township: values.township,
-            availableShops: newShops,
+            availableShops: shops,
           };
           axios
             .put(`/api/rider/${id}`, payload)
@@ -135,20 +142,20 @@ const RiderEdit = (props) => {
               label="Phone number"
               variant="outlined"
             />
-
+            <Typography variant="h6" className={classes.input}>
+              Your previous shops
+            </Typography>
             {data.availableShops.map((shop, i) => (
               <Chip
-                style={{ marginTop: "1rem" }}
                 color="secondary"
                 key={i}
                 variant="outlined"
                 label={shop.name}
-                // onDelete={handleDelete(shop)}
                 className={classes.chip}
               />
             ))}
             <Typography variant="h6" className={classes.input}>
-              Add more shops
+              Edit your shops
             </Typography>
             {shops.map((shop, i) => (
               <Chip
@@ -184,6 +191,7 @@ const RiderEdit = (props) => {
               color="primary"
               className={classes.input}
               onClick={(e) => addNewShopHandler(e)}
+              disabled={shopName.length === 0}
             >
               Add shop
             </Button>
@@ -198,16 +206,6 @@ const RiderEdit = (props) => {
             >
               Done!
             </Button>
-            {/* <Button
-              type="submit"
-              fullWidth
-              onClick={handleSubmit}
-              color="secondary"
-              variant="outlined"
-              className={classes.input}
-            >
-              Delete Rider
-            </Button> */}
           </form>
         )}
       </Formik>
