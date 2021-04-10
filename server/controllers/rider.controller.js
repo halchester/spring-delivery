@@ -41,9 +41,9 @@ exports.deleteRider = async (req, res) => {
 };
 
 exports.editRider = async (req, res) => {
-  const { uniqueId } = req.body;
+  const { id } = req.params;
   await Rider.updateOne(
-    { uniqueId: uniqueId },
+    { uniqueId: id },
     {
       $set: { ...req.body },
     },

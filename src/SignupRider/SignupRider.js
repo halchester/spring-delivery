@@ -14,6 +14,7 @@ import axios from "../api/index";
 import Spinner from "../utils/Spinner/Spinner";
 import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
+import { riderSignUpValidation } from "../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -57,6 +58,7 @@ const SignupRider = () => {
     <Box component="div" className={classes.container}>
       <Typography variant="h5">Create a new rider profile!</Typography>
       <Formik
+        validationSchema={riderSignUpValidation}
         enableReinitialize={true}
         initialValues={{
           name: "",
@@ -97,6 +99,9 @@ const SignupRider = () => {
               className={classes.input}
               onChange={handleChange}
               fullWidth
+              error={touched && errors.name}
+              helperText={errors.name}
+              onBlur={handleBlur}
             />
             <Autocomplete
               name="township"
@@ -105,12 +110,15 @@ const SignupRider = () => {
               onChange={(e, newValue, reason) => {
                 setFieldValue("township", newValue);
               }}
+              onBlur={handleBlur}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   fullWidth
                   label="Township"
                   variant="outlined"
+                  error={touched && errors.township}
+                  helperText={errors.townships}
                 />
               )}
             />
@@ -122,6 +130,9 @@ const SignupRider = () => {
               className={classes.input}
               onChange={handleChange}
               fullWidth
+              error={touched && errors.phoneNumber}
+              helperText={errors.phoneNumber}
+              onBlur={handleBlur}
             />
             <Typography variant="h6" className={classes.input}>
               Tell us about the shops you are ok to deliver

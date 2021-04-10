@@ -16,16 +16,16 @@ const RiderDetail = (props) => {
   const id = props.match.params.id;
   const classes = useStyle();
   const { status, data } = useQuery(id, getOneRider);
-  console.log(status, data);
+
   return status === "success" ? (
     <Box className={classes.container}>
-      <Typography variant="h5" gutterBottom align="center">
+      <Typography variant="h4" gutterBottom>
         {data.name}
       </Typography>
-      <Typography variant="h5" gutterBottom align="center">
-        {data.township}
+      <Typography variant="h5">
+        <strong>{data.township}</strong>
       </Typography>
-      <Typography variant="h5" gutterBottom align="center" color="secondary">
+      <Typography variant="h5" gutterBottom color="secondary">
         <strong>{data.phoneNumber}</strong>
       </Typography>
       <hr />
