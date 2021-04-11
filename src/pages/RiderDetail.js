@@ -57,8 +57,9 @@ const RiderDetail = (props) => {
       </Typography>
       <Typography variant="h5" gutterBottom>
         <strong>
-          {data.township.map((item) => (
+          {data.township.map((item, i) => (
             <Chip
+              key={i}
               label={item}
               className={classes.chip}
               color="secondary"

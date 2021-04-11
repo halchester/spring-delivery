@@ -89,28 +89,40 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage }).single("file");
 
 exports.uploadRiderImage = async (req, res) => {
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      return res.status(500).json(err);
-    } else if (err) {
-      return res.status(500).json(err);
-    }
+  try {
     let filePath = req.file;
-    console.log(filePath);
 
-    cloudinary.config(cloudinaryConfig);
-    cloudinary.uploader
-      .upload(filePath.path, {
-        folder: "spring_delivery",
-        unique_filename: true,
-      })
-      .then((result) => {
-        let imageUrl = result.secure_url;
-        console.log(imageUrl);
-        return res.status(200).json({ success: true, data: imageUrl });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-};
+    const uploadImage = new Promise((resolve, reject) => {
+      cloudinary.config(cloudinaryConfig);
+      cloudinary.uploader
+        .upload(filePath.path, {
+          folder: "spring_delivery",
+          unique_filename: true,
+        })
+        .then((result) => {
+          let imageUrl = result.secure_url;
+          return resolve(imageUrl);
+        })
+        .catch((err) => err);
+    });
+
+    let image = await uploadImage;
+    return res.status(200).json({ success: true, data: image });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ success: true, data: {} });
+  }
+
+  // cloudinary.uploader
+  //   .upload(filePath.path, {
+  //     folder: "spring_delivery",
+  //     unique_filename: true,
+  //   })
+  //   .then((result) => {
+  //     let imageUrl = result.secure_url;
+  //     return res.status(200).json({ success: true, data: imageUrl });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+};;
