@@ -31,13 +31,21 @@ const useStyle = makeStyles((theme) => ({
 const SignupRider = () => {
   const classes = useStyle();
   const history = useHistory();
-  const [shopName, setShopName] = useState("");
-  const [shopDescription, setShopDescription] = useState("");
-  const [shops, setShops] = useState([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [picLoading, setPicLoading] = useState(false);
+
+  // For shops
+  const [shops, setShops] = useState([]);
+  const [shopName, setShopName] = useState("");
+  const [shopDescription, setShopDescription] = useState("");
+
+  // For townships
   const [townships, setTownships] = useState([]);
   const [tsp, setTsp] = useState("");
+
+  // For image
+  const [imageURL, setImageURL] = useState("");
 
   const addNewShopHandler = (e) => {
     e.preventDefault();
@@ -66,6 +74,18 @@ const SignupRider = () => {
     setTownships((shop) => shop.filter((shop) => shop !== shopToDelete));
   };
 
+  const imageUploadHandler = (e) => {
+    e.preventDefault();
+    setPicLoading(true);
+    const image = e.target.files[0];
+    const data = new FormData();
+    data.append("file", image);
+    axios.post("/api/rider/upload", data).then((response) => {
+      setPicLoading(false);
+      setImageURL(response.data.data);
+    });
+  };
+
   return (
     <Box component="div" className={classes.container}>
       <Typography variant="h5">
@@ -90,6 +110,7 @@ const SignupRider = () => {
           availableShops = shops;
           const payload = {
             name,
+            picURL: imageURL,
             township,
             availableShops,
             phoneNumber,
@@ -150,6 +171,33 @@ const SignupRider = () => {
               helperText={errors.phoneNumber}
               onBlur={handleBlur}
             />
+            {picLoading ? <Spinner /> : null}
+            {imageURL ? (
+              <img
+                src={imageURL}
+                alt="your pic"
+                style={{ marginTop: "1rem", height: 150 }}
+              />
+            ) : null}
+            <input
+              accept="image/*"
+              style={{ display: "none" }}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={imageUploadHandler}
+            />
+            <label htmlFor="contained-button-file">
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                component="span"
+                className={classes.input}
+              >
+                ဓါတ်ပုံတင်မည်
+              </Button>
+            </label>
             <Typography className={classes.input} variant="h6">
               Add delivery places for you
             </Typography>

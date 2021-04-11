@@ -25,20 +25,20 @@ const useStyle = makeStyles({
 
 const Customer = () => {
   const classes = useStyle();
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const { status, data } = useQuery("getAllRiders", getAllRiders);
 
   return status === "success" ? (
     <Box component="div" className={classes.container}>
-      <Typography variant="h4">Select your location!</Typography>
-      <TextField
+      <Typography variant="h6">Search bar or pagination?</Typography>
+      {/* <TextField
         fullWidth
         variant="outlined"
         className={classes.input}
         label="Search in your township!"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-      />
+      /> */}
       <Grid container spacing={2} className={classes.bodyContainer}>
         {data.map((person, i) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
@@ -46,11 +46,11 @@ const Customer = () => {
           </Grid>
         ))}
       </Grid>
-      {query ? (
+      {/* {query ? (
         <Typography align="center" variant="h6" className={classes.input}>
           <strong>No other users found near you :(</strong>
         </Typography>
-      ) : null}
+      ) : null} */}
     </Box>
   ) : (
     <Spinner />

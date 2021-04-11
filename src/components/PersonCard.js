@@ -41,18 +41,21 @@ const PersonCard = ({ person }) => {
         history.push(`/info/${person.uniqueId}`);
       }}
     >
-      <Typography variant="h5">{person.name}</Typography>
+      <Typography variant="h5" gutterBottom>
+        <strong>{person.name}</strong>
+      </Typography>
       <Typography variant="h5">
         <strong>
-          {person.township.map((township) => (
-            <Chip label={township} className={classes.chip} color="secondary" />
+          {person.township.map((township, i) => (
+            <Chip
+              key={i}
+              label={township}
+              className={classes.chip}
+              color="secondary"
+            />
           ))}
         </strong>
       </Typography>
-      {/* <hr />
-      <Typography gutterBottom variant="body2">
-        Shops available for this person
-      </Typography> */}
       <Box className={classes.foodListContainer}>
         {person.availableShops.map((shop, i) => (
           <ListItem key={i}>

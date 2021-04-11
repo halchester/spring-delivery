@@ -11,6 +11,10 @@ const RiderModel = mongoose.Schema({
     type: String,
     required: true,
   },
+  picURL: {
+    type: String,
+    required: true,
+  },
   township: {
     type: Schema.Types.Array,
     required: true,

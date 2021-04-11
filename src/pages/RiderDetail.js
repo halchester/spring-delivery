@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Card,
   Chip,
@@ -20,6 +21,12 @@ const useStyle = makeStyles((theme) => ({
   chip: {
     margin: theme.spacing(0.3),
   },
+  titleAndPic: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
 }));
 
 const RiderDetail = (props) => {
@@ -29,11 +36,20 @@ const RiderDetail = (props) => {
 
   return status === "success" ? (
     <Box className={classes.container}>
-      <Typography variant="h4">{data.name}</Typography>
-      <Typography variant="h5" color="secondary">
-        <strong>{data.phoneNumber}</strong>
+      <Box className={classes.titleAndPic}>
+        <Box>
+          <Typography variant="h4">{data.name}</Typography>
+          <Typography variant="h5" color="secondary">
+            <strong>{data.phoneNumber}</strong>
+          </Typography>
+        </Box>
+        <Box>
+          <Avatar src={data.picURL} style={{ width: "6rem", height: "6rem" }} />
+        </Box>
+      </Box>
+      <Typography style={{ marginTop: "1rem" }} gutterBottom>
+        {data.detail}
       </Typography>
-      <Typography gutterBottom>{data.detail}</Typography>
       <hr />
 
       <Typography variant="body2" align="center" gutterBottom>

@@ -24,6 +24,17 @@ const SignupSuccess = (props) => {
         color="secondary"
         style={{ marginTop: "1rem" }}
         onClick={() => {
+          history.push(`/info/${id}`);
+        }}
+      >
+        View your profile
+      </Button>
+      <Button
+        fullWidth
+        variant="contained"
+        color="secondary"
+        style={{ marginTop: "1rem" }}
+        onClick={() => {
           history.push("/");
         }}
       >

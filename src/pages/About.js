@@ -20,7 +20,8 @@ const About = () => {
         app, those deliveries could be grouped in one app, and provide necessary
         information about his or her ride. Also customers can call them and tell
         them what to buy <strong>(only from their available shops)</strong> and
-        of course they can tip as much as they want as delivery fees :D
+        of course customers can tip as much as customers want as delivery fees
+        :D
       </Typography>
       <hr />
       <Typography>

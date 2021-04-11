@@ -66,8 +66,6 @@ const RiderEdit = (props) => {
     // eslint-disable-next-line
   }, [status]);
 
-  console.log(shops, townships);
-
   const handleDelete = (shopToDelete) => () => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
   };
