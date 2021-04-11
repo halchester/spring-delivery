@@ -42,8 +42,6 @@ const RiderEdit = (props) => {
   const [townships, setTownships] = useState([]);
   const [tsp, setTsp] = useState("");
 
-  const [money, setMoney] = useState("");
-
   const [loading, setLoading] = useState(false);
   const { status, data } = useQuery(id, getOneRider);
 
@@ -64,7 +62,6 @@ const RiderEdit = (props) => {
     if (status === "success") {
       setShops(data.availableShops);
       setTownships(data.township);
-      setMoney(data.expectedMoney);
     }
     // eslint-disable-next-line
   }, [status]);
