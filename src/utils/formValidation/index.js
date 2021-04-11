@@ -4,6 +4,7 @@ export const riderSignUpValidation = Yup.object().shape({
   name: Yup.string().required("Name is required!"),
   detail: Yup.string().required("Tell us about yourself!"),
   phoneNumber: Yup.string().required("Phone number is required!"),
+  expectedMoney: Yup.string().required("Expected Money is required!"),
 });
 
 export const checkMimeType = (event) => {

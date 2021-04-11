@@ -12,11 +12,11 @@ const SignupSuccess = (props) => {
         style={{ marginTop: "8rem" }}
         gutterBottom
       >
-        Your id is <strong>{id}</strong>
+        သင့် id : <strong>{id}</strong>
       </Typography>
       <hr />
-      <Typography align="center" variant="h4">
-        Take a screenshot or remember your id!
+      <Typography align="center" variant="body2">
+        ဒီ ID ကိုမှတ်ထားပေးပါ ပြန်ပြင်တာတို့ဘာတို့ဆိုရင်လိုအပ်ပါတယ်
       </Typography>
       <Button
         fullWidth
@@ -27,7 +27,7 @@ const SignupSuccess = (props) => {
           history.push(`/info/${id}`);
         }}
       >
-        View your profile
+        profile ကြည့်ရန်
       </Button>
       <Button
         fullWidth
@@ -38,7 +38,7 @@ const SignupSuccess = (props) => {
           history.push("/");
         }}
       >
-        Return to home
+        ပြန်ထွက်
       </Button>
     </Box>
   );

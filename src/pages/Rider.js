@@ -51,7 +51,7 @@ const Rider = () => {
   return (
     <Box component="div" className={classes.container}>
       <Typography variant="h5" align="center">
-        Edit your profile!
+        Profile ပြင်/ ကြည့်ရန် ID ထည့်ပါ
       </Typography>
       <TextField
         fullWidth
@@ -70,7 +70,7 @@ const Rider = () => {
         onClick={() => searchUser(id)}
         disabled={!id}
       >
-        Continue
+        ဆက်သွားမည်
       </Button>
       {loading ? <Spinner /> : null}
       {found ? (
@@ -87,7 +87,7 @@ const Rider = () => {
               size="small"
               onClick={() => history.push(`/rider/edit/${data.uniqueId}`)}
             >
-              Edit Profile
+              ပြင်ရန်
             </Button>
             <Button
               variant="outlined"
@@ -96,7 +96,7 @@ const Rider = () => {
               style={{ marginLeft: "0.3rem" }}
               onClick={() => history.push(`/info/${data.uniqueId}`)}
             >
-              View Profile
+              ကြည့်ရန်
             </Button>
           </Card>
         </Box>
@@ -112,14 +112,14 @@ const Rider = () => {
       )}
       <hr />
       <Typography variant="h5" align="center" className={classes.input}>
-        New rider? Welcome to spring snack! Create a new profile{" "}
+        New rider? Welcome to spring delivery! Create a new profile{" "}
         <strong
           className={classes.signup}
           onClick={() => {
             history.push("/rider/signup");
           }}
         >
-          here
+          Profile အသစ်လုပ်ရန်
         </strong>
         !
       </Typography>

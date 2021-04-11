@@ -23,11 +23,11 @@ const Home = () => {
   const history = useHistory();
   return (
     <Box className={classes.root}>
-      <Typography variant="h3" align="center" color="primary">
-        <strong>Spring</strong>
+      <Typography variant="h3" align="center" color="primary" gutterBottom>
+        <strong>နွေဦး</strong>
       </Typography>
       <Typography variant="h3" gutterBottom align="center" color="primary">
-        <strong>Snacks</strong>
+        <strong>Delivery</strong>
       </Typography>
       <Box className={classes.chooseContainer}>
         <Button

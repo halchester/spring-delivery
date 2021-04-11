@@ -42,6 +42,8 @@ const RiderEdit = (props) => {
   const [townships, setTownships] = useState([]);
   const [tsp, setTsp] = useState("");
 
+  const [money, setMoney] = useState("");
+
   const [loading, setLoading] = useState(false);
   const { status, data } = useQuery(id, getOneRider);
 
@@ -62,6 +64,7 @@ const RiderEdit = (props) => {
     if (status === "success") {
       setShops(data.availableShops);
       setTownships(data.township);
+      setMoney(data.expectedMoney);
     }
     // eslint-disable-next-line
   }, [status]);
@@ -91,9 +94,11 @@ const RiderEdit = (props) => {
           setLoading(true);
           const payload = {
             name: values.name,
+            detail: values.detail,
             phoneNumber: values.phoneNumber,
             township: townships,
             availableShops: shops,
+            expectedMoney: values.expectedMoney,
           };
           axios
             .put(`/api/rider/${id}`, payload)
@@ -123,7 +128,7 @@ const RiderEdit = (props) => {
               fullWidth
               value={values.name}
               className={classes.input}
-              label="Name"
+              label="နာမည်"
               onChange={handleChange}
               variant="outlined"
               onBlur={handleBlur}
@@ -133,7 +138,7 @@ const RiderEdit = (props) => {
               fullWidth
               value={values.detail}
               className={classes.input}
-              label="About you"
+              label="မိမိအကြောင်းအနည်းငယ်ဖော်ပြရန်"
               multiline
               rows={3}
               onChange={handleChange}
@@ -147,7 +152,17 @@ const RiderEdit = (props) => {
               onChange={handleChange}
               value={values.phoneNumber}
               className={classes.input}
-              label="Phone number"
+              label="ဖုန်းနံပါတ်"
+              variant="outlined"
+            />
+            <TextField
+              name="expectedMoney"
+              fullWidth
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.expectedMoney}
+              className={classes.input}
+              label="အခေါက်ကြေး"
               variant="outlined"
             />
             <hr />

@@ -86,6 +86,15 @@ const SignupRider = () => {
     });
   };
 
+  const formikInitialValues = {
+    name: "",
+    detail: "",
+    township: [],
+    phoneNumber: "",
+    expectedMoney: 1500,
+    availableShops: [],
+  };
+
   return (
     <Box component="div" className={classes.container}>
       <Typography variant="h5">
@@ -94,15 +103,16 @@ const SignupRider = () => {
       <Formik
         validationSchema={riderSignUpValidation}
         // enableReinitialize={true}
-        initialValues={{
-          name: "",
-          detail: "",
-          township: [],
-          phoneNumber: "",
-          availableShops: [],
-        }}
+        initialValues={formikInitialValues}
         onSubmit={async (
-          { name, township, phoneNumber, availableShops, detail },
+          {
+            name,
+            township,
+            phoneNumber,
+            availableShops,
+            detail,
+            expectedMoney,
+          },
           { resetForm }
         ) => {
           setLoading(true);
@@ -112,6 +122,7 @@ const SignupRider = () => {
             name,
             picURL: imageURL,
             township,
+            expectedMoney,
             availableShops,
             phoneNumber,
             detail,
@@ -136,7 +147,7 @@ const SignupRider = () => {
             <TextField
               value={values.name}
               name="name"
-              label="Name"
+              label="နာမည်"
               variant="outlined"
               className={classes.input}
               onChange={handleChange}
@@ -148,7 +159,7 @@ const SignupRider = () => {
             <TextField
               value={values.detail}
               name="detail"
-              label="About you"
+              label="မိမိအကြောင်းအနည်းငယ်ဖော်ပြရန်"
               variant="outlined"
               className={classes.input}
               onChange={handleChange}
@@ -163,12 +174,26 @@ const SignupRider = () => {
               variant="outlined"
               name="phoneNumber"
               value={values.phoneNumber}
-              label="Phone Number"
+              label="ဖုန်းနံပါတ်"
               className={classes.input}
               onChange={handleChange}
               fullWidth
               error={touched.phoneNumber && errors.phoneNumber}
               helperText={errors.phoneNumber}
+              onBlur={handleBlur}
+            />
+            <TextField
+              variant="outlined"
+              name="expectedMoney"
+              type="number"
+              defaultValue={values.expectedMoney}
+              value={values.expectedMoney}
+              label="အခေါက်ကြေး"
+              className={classes.input}
+              onChange={handleChange}
+              fullWidth
+              error={touched.expectedMoney && errors.expectedMoney}
+              helperText={errors.expectedMoney}
               onBlur={handleBlur}
             />
             {picLoading ? <Spinner /> : null}
@@ -198,8 +223,8 @@ const SignupRider = () => {
                 ဓါတ်ပုံတင်မည်
               </Button>
             </label>
-            <Typography className={classes.input} variant="h6">
-              Add delivery places for you
+            <Typography className={classes.input} variant="h6" gutterBottom>
+              ရရှိနိုင်မည့်မြို့နယ်ကို ၁ ခုချင်း ထည့်ရန် နှိပ်ပြီးထည့်ပါ
             </Typography>
             {townships.map((item, i) => (
               <Chip
@@ -213,11 +238,11 @@ const SignupRider = () => {
             ))}
             <Autocomplete
               value={tsp}
-              label="Townships"
+              label="မြို့နယ်"
               options={townshipData}
               fullWidth
               renderInput={(params) => (
-                <TextField {...params} label="Townships" variant="outlined" />
+                <TextField {...params} label="မြို့နယ်" variant="outlined" />
               )}
               onChange={(e, newValue) => {
                 e.preventDefault();
@@ -232,10 +257,11 @@ const SignupRider = () => {
               disabled={tsp.length === 0}
               onClick={(e) => addNewTownshipHandler(e)}
             >
-              Add Township
+              မြို့နယ်ထည့်ရန်
             </Button>
-            <Typography variant="h6" className={classes.input}>
-              Tell us about the shops you are ok to deliver
+            <Typography variant="h6" className={classes.input} gutterBottom>
+              စားသောက်ဆိုင် / စတိုးဆိုင်များ ( ရနိုင်မည်ဆို ၁ ခုချင်းထည့်ပေးရန်
+              )
             </Typography>
             {shops.map((shop, i) => (
               <Chip
@@ -250,7 +276,7 @@ const SignupRider = () => {
             <TextField
               variant="outlined"
               value={shopName}
-              label="Shop Name"
+              label="ဆိုင်နာမည်"
               className={classes.input}
               onChange={(e) => setShopName(e.target.value)}
               fullWidth
@@ -259,8 +285,8 @@ const SignupRider = () => {
               variant="outlined"
               // name="phoneNumber"
               value={shopDescription}
-              label="Shop Description"
-              helperText="Can be empty!"
+              label="ဆိုင်အကြောင်း"
+              helperText="လူသိများပါက ဆိုင်အကြောင်းမထည့်လည်းရပါတယ် "
               multiline
               rows={3}
               className={classes.input}
@@ -274,7 +300,7 @@ const SignupRider = () => {
               disabled={shopName.length === 0}
               onClick={(e) => addNewShopHandler(e)}
             >
-              Add shop
+              ဆိုင်ထည့်ရန်
             </Button>
             {loading ? <Spinner /> : null}
             {success ? (
@@ -288,7 +314,7 @@ const SignupRider = () => {
               type="submit"
               fullWidth
               onClick={handleSubmit}
-              disabled={townships.length === 0}
+              disabled={townships.length === 0 || imageURL.length === 0}
               color="secondary"
               variant="contained"
               className={classes.input}
@@ -303,8 +329,3 @@ const SignupRider = () => {
 };
 
 export default SignupRider;
-
-// TODOS:
-// [x]: formik form with kind of data fields in data.js
-// [x]: add new restaurants with idk what to call that( click to add new field)
-// []: photo or without photo? think with photo is better for person validation

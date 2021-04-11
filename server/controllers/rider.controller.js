@@ -11,6 +11,7 @@ exports.registerNewRider = async (req, res) => {
       phoneNumber,
       detail,
       picURL,
+      expectedMoney,
     } = req.body;
     const payload = {
       name,
@@ -19,6 +20,7 @@ exports.registerNewRider = async (req, res) => {
       availableShops,
       detail,
       picURL,
+      expectedMoney,
     };
     const newRider = new Rider(payload);
     await newRider.save();
@@ -125,4 +127,4 @@ exports.uploadRiderImage = async (req, res) => {
   //   .catch((err) => {
   //     console.log(err);
   //   });
-};;
+};

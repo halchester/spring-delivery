@@ -4,9 +4,11 @@
 module.exports = [
   {
     name: "Kyaw Kyaw",
-    uniqueId: Math.random() * 100,
-    township: "Yankin",
+    uniqueId: "some random string",
+    picURL: "somestrong link",
+    township: ["Yankin"],
     phoneNumber: "09-2322342",
+    expectedMoney: 1500,
     availableShops: [
       {
         name: "Pizza Hut (8 miles)",
@@ -14,54 +16,6 @@ module.exports = [
       },
       {
         name: "Chilli Pot (ho narr)",
-      },
-    ],
-  },
-  {
-    name: "Mg Mg",
-    township: "Mayangone",
-    uniqueId: Math.random() * 100,
-    phoneNumber: "09-2322342",
-    availableShops: [
-      {
-        name: "asdf (some random shops)",
-        detail: "Home made breads and dan pout",
-      },
-      {
-        name: "Chilli Pot (ho narr)",
-      },
-    ],
-  },
-  {
-    name: "Ko Ko",
-    uniqueId: Math.random() * 100,
-    township: "Dagon",
-    phoneNumber: "09-2322342",
-    availableShops: [
-      {
-        name: "Chilli Pot",
-        detail: "Cannot do a lot of biking",
-      },
-    ],
-  },
-  {
-    name: "Sam",
-    uniqueId: Math.random() * 100,
-    township: "North Dagon",
-    phoneNumber: "09-2322342",
-    availableShops: [
-      {
-        name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
-        description: "good place",
-      },
-      {
-        name: "Chilli Pot",
-      },
-      {
-        name: "Chilli Pot",
       },
     ],
   },

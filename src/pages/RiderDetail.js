@@ -50,6 +50,10 @@ const RiderDetail = (props) => {
       <Typography style={{ marginTop: "1rem" }} gutterBottom>
         {data.detail}
       </Typography>
+      <Typography gutterBottom variant="h5">
+        Delivery fees :{" "}
+        <strong style={{ color: "#ce1212" }}>{data.expectedMoney}</strong>
+      </Typography>
       <hr />
 
       <Typography variant="body2" align="center" gutterBottom>

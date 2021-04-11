@@ -11,6 +11,10 @@ const RiderModel = mongoose.Schema({
     type: String,
     required: true,
   },
+  expectedMoney: {
+    type: Number,
+    required: true,
+  },
   picURL: {
     type: String,
     required: true,
