@@ -30,25 +30,26 @@ const RiderDetail = (props) => {
   return status === "success" ? (
     <Box className={classes.container}>
       <Typography variant="h4">{data.name}</Typography>
-      <Typography variant="h5" gutterBottom color="secondary">
+      <Typography variant="h5" color="secondary">
         <strong>{data.phoneNumber}</strong>
       </Typography>
-      <Typography variant="h5">
+      <Typography gutterBottom>{data.detail}</Typography>
+      <hr />
+
+      <Typography variant="body2" align="center" gutterBottom>
+        <strong>Available Shops and Delivery &nbsp; &#8595; </strong>
+      </Typography>
+      <Typography variant="h5" gutterBottom>
         <strong>
           {data.township.map((item) => (
             <Chip
               label={item}
               className={classes.chip}
               color="secondary"
-              variant="outlined"
+              size="medium"
             />
           ))}
         </strong>
-      </Typography>
-
-      <hr />
-      <Typography variant="body2" align="center" gutterBottom>
-        <strong>Available for delivery &nbsp; &#8595; </strong>
       </Typography>
       <Box>
         <Grid container spacing={2}>

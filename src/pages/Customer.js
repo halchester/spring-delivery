@@ -13,7 +13,7 @@ import Spinner from "../utils/Spinner/Spinner";
 
 const useStyle = makeStyles({
   bodyContainer: {
-    marginTop: "1.5rem",
+    marginTop: "1rem",
   },
   container: {
     marginTop: "0.5rem",
@@ -40,18 +40,11 @@ const Customer = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <Grid container spacing={2} className={classes.bodyContainer}>
-        {data
-          // eslint-disable-next-line
-          .filter((person) => {
-            if (query === "") return person;
-            else if (person.township.toLowerCase().includes(query))
-              return person;
-          })
-          .map((person, i) => (
-            <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
-              <PersonCard person={person} />
-            </Grid>
-          ))}
+        {data.map((person, i) => (
+          <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
+            <PersonCard person={person} />
+          </Grid>
+        ))}
       </Grid>
       {query ? (
         <Typography align="center" variant="h6" className={classes.input}>

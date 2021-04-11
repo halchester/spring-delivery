@@ -49,10 +49,10 @@ const PersonCard = ({ person }) => {
           ))}
         </strong>
       </Typography>
-      <hr />
+      {/* <hr />
       <Typography gutterBottom variant="body2">
         Shops available for this person
-      </Typography>
+      </Typography> */}
       <Box className={classes.foodListContainer}>
         {person.availableShops.map((shop, i) => (
           <ListItem key={i}>

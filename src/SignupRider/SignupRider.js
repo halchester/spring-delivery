@@ -76,18 +76,25 @@ const SignupRider = () => {
         // enableReinitialize={true}
         initialValues={{
           name: "",
+          detail: "",
           township: [],
           phoneNumber: "",
           availableShops: [],
         }}
         onSubmit={async (
-          { name, township, phoneNumber, availableShops },
+          { name, township, phoneNumber, availableShops, detail },
           { resetForm }
         ) => {
           setLoading(true);
           township = townships;
           availableShops = shops;
-          const payload = { name, township, availableShops, phoneNumber };
+          const payload = {
+            name,
+            township,
+            availableShops,
+            phoneNumber,
+            detail,
+          };
           await axios.post("/api/rider", payload).then((response) => {
             setLoading(false);
             setSuccess(true);
@@ -113,8 +120,34 @@ const SignupRider = () => {
               className={classes.input}
               onChange={handleChange}
               fullWidth
-              error={touched && errors.name}
+              error={touched.name && errors.name}
               helperText={errors.name}
+              onBlur={handleBlur}
+            />
+            <TextField
+              value={values.detail}
+              name="detail"
+              label="About you"
+              variant="outlined"
+              className={classes.input}
+              onChange={handleChange}
+              fullWidth
+              multiline
+              rows={3}
+              error={touched.detail && errors.detail}
+              helperText={errors.detail}
+              onBlur={handleBlur}
+            />
+            <TextField
+              variant="outlined"
+              name="phoneNumber"
+              value={values.phoneNumber}
+              label="Phone Number"
+              className={classes.input}
+              onChange={handleChange}
+              fullWidth
+              error={touched.phoneNumber && errors.phoneNumber}
+              helperText={errors.phoneNumber}
               onBlur={handleBlur}
             />
             <Typography className={classes.input} variant="h6">
@@ -153,18 +186,6 @@ const SignupRider = () => {
             >
               Add Township
             </Button>
-            <TextField
-              variant="outlined"
-              name="phoneNumber"
-              value={values.phoneNumber}
-              label="Phone Number"
-              className={classes.input}
-              onChange={handleChange}
-              fullWidth
-              error={touched && errors.phoneNumber}
-              helperText={errors.phoneNumber}
-              onBlur={handleBlur}
-            />
             <Typography variant="h6" className={classes.input}>
               Tell us about the shops you are ok to deliver
             </Typography>
@@ -219,7 +240,7 @@ const SignupRider = () => {
               type="submit"
               fullWidth
               onClick={handleSubmit}
-              disabled={townships.length === 0 || shops.length === 0}
+              disabled={townships.length === 0}
               color="secondary"
               variant="contained"
               className={classes.input}

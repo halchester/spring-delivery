@@ -7,8 +7,9 @@ const RiderModel = mongoose.Schema({
     type: String,
     required: true,
   },
-  uniqueId: {
+  detail: {
     type: String,
+    required: true,
   },
   township: {
     type: Schema.Types.Array,
@@ -20,6 +21,9 @@ const RiderModel = mongoose.Schema({
   },
   availableShops: {
     type: Schema.Types.Array,
+  },
+  uniqueId: {
+    type: String,
   },
 });
 

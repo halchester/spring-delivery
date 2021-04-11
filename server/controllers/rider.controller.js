@@ -2,8 +2,8 @@ const Rider = require("../models/Rider");
 
 exports.registerNewRider = async (req, res) => {
   try {
-    const { name, township, availableShops, phoneNumber } = req.body;
-    const payload = { name, township, phoneNumber, availableShops };
+    const { name, township, availableShops, phoneNumber, detail } = req.body;
+    const payload = { name, township, phoneNumber, availableShops, detail };
     const newRider = new Rider(payload);
     await newRider.save();
     return res

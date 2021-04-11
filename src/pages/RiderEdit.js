@@ -11,10 +11,10 @@ import { getOneRider } from "../api/query";
 import Spinner from "../utils/Spinner/Spinner";
 import { Formik } from "formik";
 import { Autocomplete } from "@material-ui/lab";
-import townships from "../SignupRider/townships";
 import { useEffect, useState } from "react";
 import axios from "../api/index";
 import { useHistory } from "react-router";
+import townshipData from "../SignupRider/townships";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -32,9 +32,16 @@ const RiderEdit = (props) => {
   const id = props.match.params.id;
   const classes = useStyle();
   const history = useHistory();
+
+  // Get data from api and then set to app State and then push back in formik
   const [shops, setShops] = useState([]);
   const [shopName, setShopName] = useState("");
   const [shopDescription, setShopDescription] = useState("");
+
+  // Get data from api and then set to app State and then push back in formik
+  const [townships, setTownships] = useState([]);
+  const [tsp, setTsp] = useState("");
+
   const [loading, setLoading] = useState(false);
   const { status, data } = useQuery(id, getOneRider);
 
@@ -54,14 +61,25 @@ const RiderEdit = (props) => {
   useEffect(() => {
     if (status === "success") {
       setShops(data.availableShops);
+      setTownships(data.township);
     }
     // eslint-disable-next-line
   }, [status]);
 
-  console.log(shops);
+  console.log(shops, townships);
 
   const handleDelete = (shopToDelete) => () => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
+  };
+
+  const handleDeleteTsp = (shopToDelete) => () => {
+    setTownships((shop) => shop.filter((shop) => shop !== shopToDelete));
+  };
+
+  const addNewTownshipHandler = (e) => {
+    e.preventDefault();
+    setTownships((prevTsps) => [...prevTsps, tsp]);
+    setTsp("");
   };
 
   return status === "success" ? (
@@ -76,7 +94,7 @@ const RiderEdit = (props) => {
           const payload = {
             name: values.name,
             phoneNumber: values.phoneNumber,
-            township: values.township,
+            township: townships,
             availableShops: shops,
           };
           axios
@@ -112,26 +130,17 @@ const RiderEdit = (props) => {
               variant="outlined"
               onBlur={handleBlur}
             />
-            <Autocomplete
-              name="township"
-              options={townships}
-              value={values.township}
-              onBlur={handleBlur}
+            <TextField
+              name="detail"
+              fullWidth
+              value={values.detail}
               className={classes.input}
-              getOptionSelected={(option, value) => {
-                values.township = value;
-              }}
-              onChange={(e, newValue) => {
-                setFieldValue("township", newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  label="Township"
-                  variant="outlined"
-                />
-              )}
+              label="About you"
+              multiline
+              rows={3}
+              onChange={handleChange}
+              variant="outlined"
+              onBlur={handleBlur}
             />
             <TextField
               name="phoneNumber"
@@ -143,18 +152,77 @@ const RiderEdit = (props) => {
               label="Phone number"
               variant="outlined"
             />
+            <hr />
             <Typography variant="h6" className={classes.input}>
-              Your previous shops
+              Your prvious townships
             </Typography>
-            {data.availableShops.map((shop, i) => (
+            {data.township.map((item, i) => (
               <Chip
                 color="secondary"
                 key={i}
                 variant="outlined"
-                label={shop.name}
+                label={item}
                 className={classes.chip}
               />
             ))}
+            <Typography variant="h6" className={classes.input}>
+              Edit townships
+            </Typography>
+
+            {townships.map((item, i) => (
+              <Chip
+                color="secondary"
+                key={i}
+                variant="outlined"
+                label={item}
+                onDelete={handleDeleteTsp(item)}
+                className={classes.chip}
+              />
+            ))}
+
+            <Autocomplete
+              value={tsp}
+              label="Townships"
+              options={townshipData}
+              fullWidth
+              renderInput={(params) => (
+                <TextField {...params} label="Townships" variant="outlined" />
+              )}
+              onChange={(e, newValue) => {
+                e.preventDefault();
+                setTsp(newValue);
+              }}
+              className={classes.input}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.input}
+              disabled={tsp.length === 0}
+              onClick={(e) => addNewTownshipHandler(e)}
+            >
+              Add Township
+            </Button>
+            <hr />
+            <Typography variant="h6" className={classes.input}>
+              Your previous shops
+            </Typography>
+            {data.availableShops.length === 0 ? (
+              <Typography align="left">
+                You have no shops :( Add shop below!
+              </Typography>
+            ) : (
+              data.availableShops.map((shop, i) => (
+                <Chip
+                  color="secondary"
+                  key={i}
+                  variant="outlined"
+                  label={shop.name}
+                  className={classes.chip}
+                />
+              ))
+            )}
+
             <Typography variant="h6" className={classes.input}>
               Edit your shops
             </Typography>
