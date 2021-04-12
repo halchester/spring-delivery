@@ -218,7 +218,7 @@ const RiderEdit = (props) => {
               variant="contained"
               color="primary"
               className={classes.input}
-              disabled={tsp.length === 0}
+              disabled={!tsp}
               onClick={(e) => addNewTownshipHandler(e)}
             >
               Add Township

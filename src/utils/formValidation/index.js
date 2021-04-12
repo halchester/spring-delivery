@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
 export const riderSignUpValidation = Yup.object().shape({
-  name: Yup.string().required("Name is required!"),
-  detail: Yup.string().required("Tell us about yourself!"),
+  name: Yup.string().max(100).required("Name is required!"),
+  detail: Yup.string().max(700).required("Tell us about yourself!"),
   phoneNumber: Yup.string().required("Phone number is required!"),
-  expectedMoney: Yup.string().required("Expected Money is required!"),
+  expectedMoney: Yup.string().max(10).required("Expected Money is required!"),
 });
 
 export const checkMimeType = (event) => {

@@ -254,7 +254,7 @@ const SignupRider = () => {
               variant="contained"
               color="primary"
               className={classes.input}
-              disabled={tsp.length === 0}
+              disabled={!tsp}
               onClick={(e) => addNewTownshipHandler(e)}
             >
               မြို့နယ်ထည့်ရန်
