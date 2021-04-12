@@ -111,20 +111,7 @@ exports.uploadRiderImage = async (req, res) => {
     let image = await uploadImage;
     return res.status(200).json({ success: true, data: image });
   } catch (err) {
-    console.log(err);
+    console.log("error", err);
     return res.status(500).json({ success: true, data: {} });
   }
-
-  // cloudinary.uploader
-  //   .upload(filePath.path, {
-  //     folder: "spring_delivery",
-  //     unique_filename: true,
-  //   })
-  //   .then((result) => {
-  //     let imageUrl = result.secure_url;
-  //     return res.status(200).json({ success: true, data: imageUrl });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };
