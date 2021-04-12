@@ -2,6 +2,8 @@ import {
   Avatar,
   Box,
   Card,
+  CardContent,
+  CardHeader,
   Chip,
   ListItem,
   ListItemAvatar,
@@ -10,8 +12,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import FastfoodIcon from "@material-ui/icons/Fastfood";
 import { useHistory } from "react-router";
+import Township from "./Township";
+import Shop from "./Shop";
 
 const useStyle = makeStyles((theme) => ({
   shopContainer: {
@@ -20,10 +23,10 @@ const useStyle = makeStyles((theme) => ({
     marginBottom: "0.2rem",
   },
   personContainer: {
-    padding: "1rem",
+    padding: "0.5rem",
   },
   foodListContainer: {
-    margin: "0.5rem 0",
+    margin: "0.3rem 0",
   },
   chip: {
     margin: theme.spacing(0.3),
@@ -41,36 +44,21 @@ const PersonCard = ({ person }) => {
         history.push(`/info/${person.uniqueId}`);
       }}
     >
-      <Typography variant="h5" gutterBottom>
-        <strong>{person.name}</strong>
-      </Typography>
-      <Typography variant="h5">
-        <strong>
-          {person.township.map((township, i) => (
-            <Chip
-              key={i}
-              label={township}
-              className={classes.chip}
-              color="secondary"
-            />
-          ))}
-        </strong>
-      </Typography>
-      <Box className={classes.foodListContainer}>
-        {person.availableShops.map((shop, i) => (
-          <ListItem key={i}>
-            <ListItemAvatar>
-              <Avatar>
-                <FastfoodIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={shop.name} />
-          </ListItem>
-        ))}
-      </Box>
-      {/* <Typography variant="h6" color="secondary">
-        {person.phoneNumber}
-      </Typography> */}
+      <CardHeader
+        avatar={<Avatar aria-label="recipe" src={person.picURL} />}
+        title={person.name}
+        subheader={person.phoneNumber}
+      />
+      <CardContent>
+        <Typography variant="h5">
+          <strong>
+            <Township township={person.township} />
+          </strong>
+        </Typography>
+        <Box className={classes.foodListContainer}>
+          <Shop availableShops={person.availableShops} />
+        </Box>
+      </CardContent>
     </Card>
   ) : null;
 };
