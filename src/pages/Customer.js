@@ -52,7 +52,7 @@ const Customer = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <Typography variant="h6">
-        ကိုယ့်မြို့နယ်ကိုရှာပြီးရနိုင်တဲ့ rider ရှိနိုင်ပါတယ် ☝️
+        မှာယူ/ပို့ဆောင်လိုသည့် မြို့နယ်ကို ရေးထည့်ပြီး rider ရွေးချယ်ပါ။
       </Typography>
       <hr />
       <Grid container spacing={2} className={classes.bodyContainer}>

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/index";
 import { useHistory } from "react-router";
 import townshipData from "../SignupRider/townships";
+import { riderSignUpValidation } from "../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -87,6 +88,7 @@ const RiderEdit = (props) => {
       </Typography>
       <Formik
         initialValues={data}
+        validationSchema={riderSignUpValidation}
         onSubmit={(values) => {
           setLoading(true);
           const payload = {
@@ -119,7 +121,7 @@ const RiderEdit = (props) => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <form>
+          <form onSubmit={handleSubmit}>
             <TextField
               name="name"
               fullWidth
@@ -129,6 +131,8 @@ const RiderEdit = (props) => {
               onChange={handleChange}
               variant="outlined"
               onBlur={handleBlur}
+              error={touched.name && errors.name}
+              helperText={errors.name}
             />
             <TextField
               name="detail"
@@ -141,6 +145,8 @@ const RiderEdit = (props) => {
               onChange={handleChange}
               variant="outlined"
               onBlur={handleBlur}
+              error={touched.detail && errors.detail}
+              helperText={errors.detail}
             />
             <TextField
               name="phoneNumber"
@@ -151,6 +157,8 @@ const RiderEdit = (props) => {
               className={classes.input}
               label="ဖုန်းနံပါတ်"
               variant="outlined"
+              error={touched.phoneNumber && errors.phoneNumber}
+              helperText={errors.phoneNumber}
             />
             <TextField
               name="expectedMoney"
@@ -161,10 +169,12 @@ const RiderEdit = (props) => {
               className={classes.input}
               label="အခေါက်ကြေး"
               variant="outlined"
+              error={touched.expectedMoney && errors.expectedMoney}
+              helperText={errors.expectedMoney}
             />
             <hr />
-            <Typography variant="h6" className={classes.input}>
-              Your prvious townships
+            <Typography variant="h6" className={classes.input} gutterBottom>
+              ယခင်ရွေးချယ်ထားပြီးသည့် မြို့နယ်များ
             </Typography>
             {data.township.map((item, i) => (
               <Chip
@@ -175,8 +185,8 @@ const RiderEdit = (props) => {
                 className={classes.chip}
               />
             ))}
-            <Typography variant="h6" className={classes.input}>
-              Edit townships
+            <Typography variant="h6" className={classes.input} gutterBottom>
+              ပို့ဆောင်ပေးမည့် မြို့နယ်များကို ပြန်လည်ပြင်ဆင်ရန်
             </Typography>
 
             {townships.map((item, i) => (
@@ -214,12 +224,12 @@ const RiderEdit = (props) => {
               Add Township
             </Button>
             <hr />
-            <Typography variant="h6" className={classes.input}>
-              Your previous shops
+            <Typography variant="h6" className={classes.input} gutterBottom>
+              ယခင်ရွေးချယ်ထားပြီးသည့် စားသောက်ဆိုင် / ဈေးဆိုင်များ
             </Typography>
             {data.availableShops.length === 0 ? (
-              <Typography align="left">
-                You have no shops :( Add shop below!
+              <Typography align="left" color="secondary">
+                မရှိသေးပါ :( အောက်တွင်ထပ်ထည့်ရန်
               </Typography>
             ) : (
               data.availableShops.map((shop, i) => (
@@ -233,8 +243,8 @@ const RiderEdit = (props) => {
               ))
             )}
 
-            <Typography variant="h6" className={classes.input}>
-              Edit your shops
+            <Typography variant="h6" className={classes.input} gutterBottom>
+              စားသောက်ဆိုင် / ဈေးဆိုင်များ ပြန်လည်ပြင်ဆင်ရန်
             </Typography>
             {shops.map((shop, i) => (
               <Chip
@@ -277,9 +287,9 @@ const RiderEdit = (props) => {
             {loading ? <Spinner /> : null}
             <Button
               type="submit"
-              disabled={shops.length === 0}
               fullWidth
               onClick={handleSubmit}
+              disabled={values.township.length === 0}
               color="secondary"
               variant="contained"
               className={classes.input}

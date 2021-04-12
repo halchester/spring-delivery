@@ -224,7 +224,7 @@ const SignupRider = () => {
               </Button>
             </label>
             <Typography className={classes.input} variant="h6" gutterBottom>
-              ရရှိနိုင်မည့်မြို့နယ်ကို ၁ ခုချင်း ထည့်ရန် နှိပ်ပြီးထည့်ပါ
+              မိမိပို့ဆောင်နိုင်မည့် မြို့နယ်များကို ၁ ခုချင်းရွေးချယ်ပါ
             </Typography>
             {townships.map((item, i) => (
               <Chip
@@ -260,8 +260,7 @@ const SignupRider = () => {
               မြို့နယ်ထည့်ရန်
             </Button>
             <Typography variant="h6" className={classes.input} gutterBottom>
-              စားသောက်ဆိုင် / စတိုးဆိုင်များ ( ရနိုင်မည်ဆို ၁ ခုချင်းထည့်ပေးရန်
-              )
+              မိမိပို့ဆောင်နိုင်မည့် စားသောက်ဆိုင် / ဈေးဆိုင်များကိုရေးထည့်ပါ
             </Typography>
             {shops.map((shop, i) => (
               <Chip

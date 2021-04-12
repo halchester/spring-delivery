@@ -55,8 +55,14 @@ const Home = () => {
           </Typography>
         </Link>
         <Box className={classes.footer}>
-          <Typography variant="body2" align="center" gutterBottom>
-            Made with ❤️ by Chester
+          <Typography variant="h6" align="center" gutterBottom>
+            Made with ❤️ by{" "}
+            <a
+              href="https://github.com/halchester"
+              style={{ textDecoration: "underline", color: "black" }}
+            >
+              halchester
+            </a>
           </Typography>
           <Typography variant="h6" align="center">
             Source on{" "}

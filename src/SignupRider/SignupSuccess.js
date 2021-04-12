@@ -16,7 +16,8 @@ const SignupSuccess = (props) => {
       </Typography>
       <hr />
       <Typography align="center" variant="body2">
-        ဒီ ID ကိုမှတ်ထားပေးပါ ပြန်ပြင်တာတို့ဘာတို့ဆိုရင်လိုအပ်ပါတယ်
+        မိမိကိုယ်ပိုင် id no. ကို screenshot ရိုက်၍ဖြစ်စေ မှတ်စုထဲတွင် ဖြစ်စေ
+        မှတ်ထားပေးပါ
       </Typography>
       <Button
         fullWidth

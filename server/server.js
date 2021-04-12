@@ -1,6 +1,5 @@
 const app = require("express")();
 const mongoose = require("mongoose");
-const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
@@ -23,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose.connect(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.x3hwc.mongodb.net/spring-snacks?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.x3hwc.mongodb.net/spring-delivery?retryWrites=true&w=majority`,
   options,
   () => console.log("Connected to db.")
 );
