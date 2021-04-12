@@ -7,6 +7,7 @@ Spring delivery is an app that could group all the delivery riders who are curre
 #### Contribution to Spring Delivery
 
 Root dir is the main UI directory. It's built with CRA and used React and Material-UI as frontend. The API can be found in ./server/ built with Express, node and MongoDB. It's basically a MERN stack app.
+You can create a new branch from master as develop and PR to it.
 
 ### Licence
 
