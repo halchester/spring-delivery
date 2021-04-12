@@ -4,10 +4,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Chip,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   makeStyles,
   Typography,
 } from "@material-ui/core";
