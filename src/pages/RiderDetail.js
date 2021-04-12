@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Card,
+  CardHeader,
   Chip,
   Grid,
   makeStyles,
@@ -77,10 +78,10 @@ const RiderDetail = (props) => {
           {data.availableShops.map((shop, i) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={i}>
               <Card className={classes.cardContainer}>
-                <Typography variant="h6" gutterBottom>
-                  <strong>{shop.name}</strong>
-                </Typography>
-                <Typography>{shop.detail}</Typography>
+                <CardHeader
+                  title={shop.name}
+                  subheader={shop.detail ? shop.detail : ""}
+                />
               </Card>
             </Grid>
           ))}
