@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Formik } from "formik";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import townshipData from "./townships.js";
+import { MandalayData, YangonData } from "../utils/townshipData.js";
 import { useState } from "react";
 import axios from "../api/index";
 import Spinner from "../utils/Spinner/Spinner";
@@ -40,9 +40,11 @@ const SignupRider = () => {
   const [shopName, setShopName] = useState("");
   const [shopDescription, setShopDescription] = useState("");
 
+  // For state,
+  const [state, setState] = useState("");
+
   // For townships
   const [townships, setTownships] = useState([]);
-  const [tsp, setTsp] = useState("");
 
   // For image
   const [imageURL, setImageURL] = useState("");
@@ -60,18 +62,8 @@ const SignupRider = () => {
     setShopDescription("");
   };
 
-  const addNewTownshipHandler = (e) => {
-    e.preventDefault();
-    setTownships((prevTsps) => [...prevTsps, tsp]);
-    setTsp("");
-  };
-
   const handleDelete = (shopToDelete) => () => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
-  };
-
-  const handleDeleteTsp = (shopToDelete) => () => {
-    setTownships((shop) => shop.filter((shop) => shop !== shopToDelete));
   };
 
   const imageUploadHandler = (e) => {
@@ -89,6 +81,7 @@ const SignupRider = () => {
   const formikInitialValues = {
     name: "",
     detail: "",
+    state: "",
     township: [],
     phoneNumber: "",
     expectedMoney: 1500,
@@ -112,6 +105,7 @@ const SignupRider = () => {
             availableShops,
             detail,
             expectedMoney,
+            state,
           },
           { resetForm }
         ) => {
@@ -121,6 +115,7 @@ const SignupRider = () => {
           const payload = {
             name,
             picURL: imageURL,
+            state,
             township,
             expectedMoney,
             availableShops,
@@ -226,39 +221,46 @@ const SignupRider = () => {
             <Typography className={classes.input} variant="h6" gutterBottom>
               မိမိပို့ဆောင်နိုင်မည့် မြို့နယ်များကို ၁ ခုချင်းရွေးချယ်ပါ
             </Typography>
-            {townships.map((item, i) => (
-              <Chip
-                color="secondary"
-                key={i}
-                variant="outlined"
-                label={item}
-                onDelete={handleDeleteTsp(item)}
-                className={classes.chip}
-              />
-            ))}
             <Autocomplete
-              value={tsp}
-              label="မြို့နယ်"
-              options={townshipData}
+              value={state}
+              label="တိုင်းဒေသကြီး"
+              options={["Yangon", "Mandalay"]}
               fullWidth
               renderInput={(params) => (
-                <TextField {...params} label="မြို့နယ်" variant="outlined" />
+                <TextField
+                  {...params}
+                  label="တိုင်းဒေသကြီး"
+                  variant="outlined"
+                />
               )}
               onChange={(e, newValue) => {
+                console.log(newValue);
                 e.preventDefault();
-                setTsp(newValue);
+                setState(newValue);
               }}
               className={classes.input}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.input}
-              disabled={!tsp}
-              onClick={(e) => addNewTownshipHandler(e)}
-            >
-              မြို့နယ်ထည့်ရန်
-            </Button>
+            {state ? (
+              <Autocomplete
+                multiple
+                value={townships}
+                label="မြို့နယ်"
+                filterSelectedOptions
+                options={state === "Yangon" ? YangonData : MandalayData}
+                getOptionDisabled={(townshipData) =>
+                  townshipData === "Yangon" || townshipData === "Mandalay"
+                }
+                fullWidth
+                renderInput={(params) => (
+                  <TextField {...params} label="မြို့နယ်" variant="outlined" />
+                )}
+                onChange={(e, newValue) => {
+                  setTownships(newValue);
+                }}
+                className={classes.input}
+              />
+            ) : null}
+
             <Typography variant="h6" className={classes.input} gutterBottom>
               မိမိပို့ဆောင်နိုင်မည့် စားသောက်ဆိုင် / ဈေးဆိုင်များကိုရေးထည့်ပါ
             </Typography>

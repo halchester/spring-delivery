@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
-import Township from "./Township";
-import Shop from "./Shop";
+import Township from "./UI/Township";
+import Shop from "./UI/Shop";
 
 const useStyle = makeStyles((theme) => ({
   shopContainer: {

@@ -6,6 +6,7 @@ exports.registerNewRider = async (req, res) => {
   try {
     const {
       name,
+      state,
       township,
       availableShops,
       phoneNumber,
@@ -15,6 +16,7 @@ exports.registerNewRider = async (req, res) => {
     } = req.body;
     const payload = {
       name,
+      state,
       township,
       phoneNumber,
       availableShops,
