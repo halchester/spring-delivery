@@ -7,15 +7,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useQuery } from "react-query";
-import { getOneRider } from "../api/query";
-import Spinner from "../utils/Spinner/Spinner";
+import { getOneRider } from "../../api/query";
+import Spinner from "../../utils/Spinner/Spinner";
 import { Formik } from "formik";
 import { Autocomplete } from "@material-ui/lab";
 import { useEffect, useState } from "react";
-import axios from "../api/index";
+import axios from "../../api/index";
 import { useHistory } from "react-router";
-import { MandalayData, YangonData } from "../utils/townshipData";
-import { riderSignUpValidation } from "../utils/formValidation/index";
+import { MandalayData, YangonData } from "../../utils/townshipData";
+import { riderSignUpValidation } from "../../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
   container: {

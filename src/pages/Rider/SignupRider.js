@@ -8,13 +8,13 @@ import {
 } from "@material-ui/core";
 import { Formik } from "formik";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { MandalayData, YangonData } from "../utils/townshipData.js";
+import { MandalayData, YangonData } from "../../utils/townshipData.js";
 import { useState } from "react";
-import axios from "../api/index";
-import Spinner from "../utils/Spinner/Spinner";
+import axios from "../../api/index";
+import Spinner from "../../utils/Spinner/Spinner";
 import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
-import { riderSignUpValidation } from "../utils/formValidation/index";
+import { riderSignUpValidation } from "../../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
   container: {
