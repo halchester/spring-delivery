@@ -64,6 +64,9 @@ const Home = () => {
               halchester
             </a>
           </Typography>
+          <Typography variant="h6" align="center">
+            Version : <strong>1.0.1</strong>
+          </Typography>
           {/* <Typography variant="h6" align="center">
             Source on{" "}
             <a

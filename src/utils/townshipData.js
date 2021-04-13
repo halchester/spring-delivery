@@ -1,6 +1,7 @@
 export const townshipData = [
   "Dagon Myothit(ဒဂုံမြို့သစ်)",
   "Pazundaung(ပုဇွန်တောင်)",
+  "Insein(အင်းစိန်)",
   "Kyauktada(ကျောက်တံတား)",
   "Lanmadaw(လမ်းမတော်)",
   "Botahtaung(ဗိုလ်တထောင်)",
@@ -11,6 +12,9 @@ export const townshipData = [
   "Tamwe(တာမွေ)",
   "Thaketa(သာကေတ)",
   "Ahlone(အလုံ)",
+  "Myaynigone(မြေနီကုန်း)",
+  "Hledan(လှည်းတန်း)",
+  "Kyouk Myaung(ကျောက်မြောင်း)",
   "Shwepyithar(ရွှေပြည်သာ)",
   "Sanchaung(စမ်းချောင်း)",
   "North Okkalapa(မြောက်ဥက္ကလာပ)",
