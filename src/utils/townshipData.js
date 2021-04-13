@@ -45,6 +45,7 @@ export const townshipData = [
 export const YangonData = [
   "Dagon Myothit(ဒဂုံမြို့သစ်)",
   "Pazundaung(ပုဇွန်တောင်)",
+  "Insein(အင်းစိန်)",
   "Kyauktada(ကျောက်တံတား)",
   "Lanmadaw(လမ်းမတော်)",
   "Botahtaung(ဗိုလ်တထောင်)",
