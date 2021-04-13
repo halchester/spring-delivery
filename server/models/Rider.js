@@ -7,6 +7,10 @@ const RiderModel = mongoose.Schema({
     type: String,
     required: true,
   },
+  state: {
+    type: String,
+    required: true,
+  },
   detail: {
     type: String,
     required: true,

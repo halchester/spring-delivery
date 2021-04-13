@@ -41,7 +41,7 @@ const SignupRider = () => {
   const [shopDescription, setShopDescription] = useState("");
 
   // For state,
-  const [state, setState] = useState("");
+  const [stateName, setStateName] = useState("");
 
   // For townships
   const [townships, setTownships] = useState([]);
@@ -112,6 +112,7 @@ const SignupRider = () => {
           setLoading(true);
           township = townships;
           availableShops = shops;
+          state = stateName;
           const payload = {
             name,
             picURL: imageURL,
@@ -222,7 +223,7 @@ const SignupRider = () => {
               မိမိပို့ဆောင်နိုင်မည့် မြို့နယ်များကို ၁ ခုချင်းရွေးချယ်ပါ
             </Typography>
             <Autocomplete
-              value={state}
+              value={stateName}
               label="တိုင်းဒေသကြီး"
               options={["Yangon", "Mandalay"]}
               fullWidth
@@ -234,22 +235,18 @@ const SignupRider = () => {
                 />
               )}
               onChange={(e, newValue) => {
-                console.log(newValue);
                 e.preventDefault();
-                setState(newValue);
+                setStateName(newValue);
               }}
               className={classes.input}
             />
-            {state ? (
+            {stateName ? (
               <Autocomplete
                 multiple
                 value={townships}
                 label="မြို့နယ်"
                 filterSelectedOptions
-                options={state === "Yangon" ? YangonData : MandalayData}
-                getOptionDisabled={(townshipData) =>
-                  townshipData === "Yangon" || townshipData === "Mandalay"
-                }
+                options={stateName === "Yangon" ? YangonData : MandalayData}
                 fullWidth
                 renderInput={(params) => (
                   <TextField {...params} label="မြို့နယ်" variant="outlined" />

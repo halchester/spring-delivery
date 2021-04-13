@@ -14,7 +14,7 @@ import { Autocomplete } from "@material-ui/lab";
 import { useEffect, useState } from "react";
 import axios from "../api/index";
 import { useHistory } from "react-router";
-import { townshipData } from "../utils/townshipData";
+import { MandalayData, YangonData } from "../utils/townshipData";
 import { riderSignUpValidation } from "../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
@@ -41,7 +41,6 @@ const RiderEdit = (props) => {
 
   // Get data from api and then set to app State and then push back in formik
   const [townships, setTownships] = useState([]);
-  const [tsp, setTsp] = useState("");
 
   const [loading, setLoading] = useState(false);
   const { status, data } = useQuery(id, getOneRider);
@@ -71,15 +70,7 @@ const RiderEdit = (props) => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
   };
 
-  const handleDeleteTsp = (shopToDelete) => () => {
-    setTownships((shop) => shop.filter((shop) => shop !== shopToDelete));
-  };
-
-  const addNewTownshipHandler = (e) => {
-    e.preventDefault();
-    setTownships((prevTsps) => [...prevTsps, tsp]);
-    setTsp("");
-  };
+  console.log(data);
 
   return status === "success" ? (
     <Box>
@@ -173,56 +164,26 @@ const RiderEdit = (props) => {
               helperText={errors.expectedMoney}
             />
             <hr />
-            <Typography variant="h6" className={classes.input} gutterBottom>
-              ယခင်ရွေးချယ်ထားပြီးသည့် မြို့နယ်များ
-            </Typography>
-            {data.township.map((item, i) => (
-              <Chip
-                color="secondary"
-                key={i}
-                variant="outlined"
-                label={item}
-                className={classes.chip}
-              />
-            ))}
+
             <Typography variant="h6" className={classes.input} gutterBottom>
               ပို့ဆောင်ပေးမည့် မြို့နယ်များကို ပြန်လည်ပြင်ဆင်ရန်
             </Typography>
-
-            {townships.map((item, i) => (
-              <Chip
-                color="secondary"
-                key={i}
-                variant="outlined"
-                label={item}
-                onDelete={handleDeleteTsp(item)}
-                className={classes.chip}
-              />
-            ))}
-
             <Autocomplete
-              value={tsp}
-              label="Townships"
-              options={townshipData}
+              multiple
+              value={townships}
+              label="မြို့နယ်"
+              filterSelectedOptions
+              options={data.state === "Yangon" ? YangonData : MandalayData}
               fullWidth
               renderInput={(params) => (
-                <TextField {...params} label="Townships" variant="outlined" />
+                <TextField {...params} label="မြို့နယ်" variant="outlined" />
               )}
               onChange={(e, newValue) => {
-                e.preventDefault();
-                setTsp(newValue);
+                setTownships(newValue);
               }}
               className={classes.input}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.input}
-              disabled={!tsp}
-              onClick={(e) => addNewTownshipHandler(e)}
-            >
-              Add Township
-            </Button>
+
             <hr />
             <Typography variant="h6" className={classes.input} gutterBottom>
               ယခင်ရွေးချယ်ထားပြီးသည့် စားသောက်ဆိုင် / ဈေးဆိုင်များ
