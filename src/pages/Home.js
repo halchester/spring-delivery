@@ -51,7 +51,7 @@ const Home = () => {
         <hr />
         <Link to="/about" style={{ textDecoration: "none" }}>
           <Typography color="secondary" variant="h6" align="center">
-            Learn more about Spring Snacks &rarr;
+            Learn more about Spring Delivery &rarr;
           </Typography>
         </Link>
         <Box className={classes.footer}>

@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useQuery } from "react-query";
-import { getOneRider } from "../api/query";
-import Spinner from "../utils/Spinner/Spinner";
+import { getOneRider } from "../../api/query";
+import Spinner from "../../utils/Spinner/Spinner";
 
 const useStyle = makeStyles((theme) => ({
   container: {

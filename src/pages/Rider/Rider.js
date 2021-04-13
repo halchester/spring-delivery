@@ -8,12 +8,8 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import axios from "../api/index";
-import Spinner from "../utils/Spinner/Spinner";
-
-// TODOS:
-// []: give each rider ID to remember and edit their profile
-// [x]: new user -> create a new profile to display
+import axios from "../../api/index";
+import Spinner from "../../utils/Spinner/Spinner";
 
 const useStyle = makeStyles({
   container: {
