@@ -64,7 +64,7 @@ const Home = () => {
               halchester
             </a>
           </Typography>
-          <Typography variant="h6" align="center">
+          {/* <Typography variant="h6" align="center">
             Source on{" "}
             <a
               href="https://github.com/halchester/spring-snacks"
@@ -72,7 +72,7 @@ const Home = () => {
             >
               Github
             </a>
-          </Typography>
+          </Typography> */}
         </Box>
       </Box>
     </Box>
