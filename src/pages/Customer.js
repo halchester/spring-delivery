@@ -54,6 +54,7 @@ const Customer = () => {
       <Typography variant="h6">
         မှာယူ/ပို့ဆောင်လိုသည့် မြို့နယ်ကို ရေးထည့်ပြီး rider ရွေးချယ်ပါ။
       </Typography>
+
       <hr />
       <Grid container spacing={2} className={classes.bodyContainer}>
         {query

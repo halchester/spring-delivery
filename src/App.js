@@ -4,10 +4,10 @@ import Home from "./pages/Home";
 import Wrapper from "./wrapper/Wrapper";
 import Rider from "./pages/Rider";
 import Customer from "./pages/Customer";
-import RiderDetail from "./pages/RiderDetail";
-import SignupRider from "./SignupRider/SignupRider";
-import SignupSuccess from "./SignupRider/SignupSuccess";
-import RiderEdit from "./pages/RiderEdit";
+import RiderDetail from "./Rider/RiderDetail";
+import SignupRider from "./Rider/SignupRider";
+import SignupSuccess from "./Rider/SignupSuccess";
+import RiderEdit from "./Rider/RiderEdit";
 import About from "./pages/About";
 
 const App = () => {

@@ -14,7 +14,7 @@ import { Autocomplete } from "@material-ui/lab";
 import { useEffect, useState } from "react";
 import axios from "../api/index";
 import { useHistory } from "react-router";
-import townshipData from "../SignupRider/townships";
+import { townshipData } from "../utils/townshipData";
 import { riderSignUpValidation } from "../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
