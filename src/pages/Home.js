@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const useStyle = makeStyles({
   root: {
-    marginTop: "1rem",
+    marginTop: "2rem",
   },
   chooseContainer: {
     marginTop: "2rem",
@@ -16,6 +16,12 @@ const useStyle = makeStyles({
   footer: {
     marginTop: "2rem",
   },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
 });
 
 const Home = () => {
@@ -23,12 +29,23 @@ const Home = () => {
   const history = useHistory();
   return (
     <Box className={classes.root}>
-      <Typography variant="h3" align="center" color="primary" gutterBottom>
-        <strong>နွေဦး</strong>
-      </Typography>
-      <Typography variant="h3" gutterBottom align="center" color="primary">
-        <strong>Delivery</strong>
-      </Typography>
+      <Box className={classes.header}>
+        <Box>
+          <Typography variant="h3" align="center" color="primary" gutterBottom>
+            <strong>နွေဦး</strong>
+          </Typography>
+          <Typography variant="h3" gutterBottom align="center" color="primary">
+            <strong>Delivery</strong>
+          </Typography>
+        </Box>
+        <Box>
+          <img
+            src="/main.png"
+            alt="logo"
+            style={{ height: "200px", width: "200px" }}
+          />
+        </Box>
+      </Box>
       <Box className={classes.chooseContainer}>
         <Button
           variant="contained"
