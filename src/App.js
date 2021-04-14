@@ -8,7 +8,7 @@ import SignupRider from "./pages/Rider/SignupRider";
 import SignupSuccess from "./pages/Rider/SignupSuccess";
 import RiderEdit from "./pages/Rider/RiderEdit";
 import About from "./pages/About";
-import CustomerChooseState from "./pages/Customer/CustomerAs";
+import CustomerChooseState from "./pages/Customer/CustomerChooseState";
 import CustomerByState from "./pages/Customer/CustomerByState";
 
 const App = () => {

@@ -57,7 +57,8 @@ const CustomerByState = (props) => {
       </Typography>
 
       <hr />
-      {data.filter((data) => data.state === stateName).length === 0 ? (
+      {data.filter((data) => data.state.toLowerCase() === stateName).length ===
+      0 ? (
         <>
           <Typography
             color="secondary"
@@ -80,14 +81,14 @@ const CustomerByState = (props) => {
         <Grid container spacing={2} className={classes.bodyContainer}>
           {query
             ? searchTownship(data, query)
-                .filter((data) => data.state === stateName)
+                .filter((data) => data.state.toLowerCase() === stateName)
                 .map((person, i) => (
                   <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
                     <PersonCard person={person} />
                   </Grid>
                 ))
             : data
-                .filter((data) => data.state === stateName)
+                .filter((data) => data.state.toLowerCase() === stateName)
                 .map((person, i) => (
                   <Grid item xs={12} sm={12} md={6} lg={4} key={i}>
                     <PersonCard person={person} />
