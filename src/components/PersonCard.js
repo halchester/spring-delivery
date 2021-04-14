@@ -41,7 +41,13 @@ const PersonCard = ({ person }) => {
       }}
     >
       <CardHeader
-        avatar={<Avatar aria-label="recipe" src={person.picURL} />}
+        avatar={
+          <Avatar
+            aria-label="recipe"
+            src={person.picURL}
+            style={{ height: "75px", width: "75px" }}
+          />
+        }
         title={person.name}
         subheader={person.phoneNumber}
       />
