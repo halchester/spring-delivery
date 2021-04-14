@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./api/query";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBNcNDNkPrbB3iR12HJb9Td19NvjmqzLJ4",
@@ -22,7 +22,16 @@ export const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+// analysis(firebaseConfig);
+
+let firebaseAnalytics;
+export async function initFirebaseAnalytics() {
+  if (!firebaseAnalytics) {
+    await require("firebase/analytics");
+    firebaseAnalytics = await firebase.analytics();
+  }
+  return firebaseAnalytics;
+}
 
 ReactDOM.render(
   <React.StrictMode>

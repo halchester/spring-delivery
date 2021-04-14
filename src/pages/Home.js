@@ -29,23 +29,24 @@ const Home = () => {
   const history = useHistory();
   return (
     <Box className={classes.root}>
-      <Box className={classes.header}>
-        <Box>
-          <Typography variant="h3" align="center" color="primary" gutterBottom>
-            <strong>နွေဦး</strong>
-          </Typography>
-          <Typography variant="h3" gutterBottom align="center" color="primary">
-            <strong>Delivery</strong>
-          </Typography>
-        </Box>
-        <Box>
-          <img
+      {/* <Box className={classes.header}>
+        <Box> */}
+      <Typography variant="h3" align="center" color="primary" gutterBottom>
+        <strong>နွေဦး</strong>
+      </Typography>
+      <Typography variant="h3" gutterBottom align="center" color="primary">
+        <strong>Delivery</strong>
+      </Typography>
+      {/* </Box>
+        <Box> */}
+      {/* <Avatar src = "/main.PNG" style={{ height: "200px", width: "200px" }}> */}
+      {/* <img
             src="/main.PNG"
             alt="logo"
             style={{ height: "200px", width: "200px" }}
           />
         </Box>
-      </Box>
+      </Box> */}
       <Box className={classes.chooseContainer}>
         <Button
           variant="contained"
