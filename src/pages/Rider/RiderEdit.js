@@ -70,8 +70,6 @@ const RiderEdit = (props) => {
     setShops((shop) => shop.filter((shop) => shop.name !== shopToDelete.name));
   };
 
-  console.log(data);
-
   return status === "success" ? (
     <Box>
       <Typography variant="h5">

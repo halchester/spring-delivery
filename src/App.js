@@ -10,6 +10,7 @@ import RiderEdit from "./pages/Rider/RiderEdit";
 import About from "./pages/About";
 import CustomerChooseState from "./pages/Customer/CustomerChooseState";
 import CustomerByState from "./pages/Customer/CustomerByState";
+import Setting from "./pages/Setting";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Wrapper>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/setting" component={Setting} />
 
         <Route exact path="/customer" component={CustomerChooseState} />
         <Route exact path="/customer/:id" component={CustomerByState} />
