@@ -40,7 +40,7 @@ const Home = () => {
         </Box>
         <Box>
           <img
-            src="/main.png"
+            src="/main.PNG"
             alt="logo"
             style={{ height: "200px", width: "200px" }}
           />
