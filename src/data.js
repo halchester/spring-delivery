@@ -6,6 +6,7 @@ module.exports = [
     name: "Kyaw Kyaw",
     uniqueId: "some random string",
     picURL: "somestrong link",
+    state: "Yangon",
     township: ["Yankin"],
     phoneNumber: "09-2322342",
     expectedMoney: 1500,

@@ -56,7 +56,7 @@ const CustomerChooseState = () => {
         disabled={!stateName}
         variant="outlined"
         color="secondary"
-        onClick={() => history.push(`/customer/${stateName}`)}
+        onClick={() => history.push(`/customer/${stateName.toLowerCase()}`)}
       >
         Continue
       </Button>
