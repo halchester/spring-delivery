@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Table,
@@ -72,7 +71,7 @@ const Setting = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Pic</TableCell>
+            {/* <TableCell>Pic</TableCell> */}
             <TableCell>Name</TableCell>
             <TableCell>Phone number</TableCell>
             <TableCell>State</TableCell>
@@ -85,12 +84,12 @@ const Setting = () => {
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((person, i) => (
               <TableRow key={i}>
-                <TableCell>
+                {/* <TableCell>
                   <Avatar
                     src={person.picURL}
                     style={{ height: "75px", width: "75px" }}
                   />
-                </TableCell>
+                </TableCell> */}
                 <TableCell>{person.name}</TableCell>
                 <TableCell>{person.phoneNumber}</TableCell>
                 <TableCell>{person.state}</TableCell>
