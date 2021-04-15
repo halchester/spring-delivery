@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
@@ -40,17 +39,7 @@ const PersonCard = ({ person }) => {
         history.push(`/info/${person.uniqueId}`);
       }}
     >
-      <CardHeader
-        avatar={
-          <Avatar
-            aria-label="recipe"
-            src={person.picURL}
-            style={{ height: "75px", width: "75px" }}
-          />
-        }
-        title={person.name}
-        subheader={person.phoneNumber}
-      />
+      <CardHeader title={person.name} subheader={person.phoneNumber} />
       <CardContent>
         <Typography variant="h5">
           <strong>
