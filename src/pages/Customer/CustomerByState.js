@@ -52,8 +52,16 @@ const CustomerByState = (props) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <Typography variant="h6">
+      <Typography variant="h6" gutterBottom>
         မှာယူ/ပို့ဆောင်လိုသည့် မြို့နယ်ကို ရေးထည့်ပြီး rider ရွေးချယ်ပါ။
+      </Typography>
+
+      <Typography variant="h6">
+        Total Riders in {stateName} :{" "}
+        <strong>
+          {data.filter((item) => item.state.toLowerCase() === stateName).length}{" "}
+          riders
+        </strong>
       </Typography>
 
       <hr />

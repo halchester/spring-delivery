@@ -8,6 +8,9 @@ import {
 import React, { useState } from "react";
 import { Autocomplete } from "@material-ui/lab";
 import { useHistory } from "react-router";
+// import { useQuery } from "react-query";
+// import { getAllRiders } from "../../api/query";
+// import Spinner from "../../utils/Spinner/Spinner";
 
 const useStyle = makeStyles({
   container: {
@@ -21,6 +24,7 @@ const useStyle = makeStyles({
 const CustomerChooseState = () => {
   const classes = useStyle();
   const history = useHistory();
+  // const { status, data } = useQuery("getAllRiders", getAllRiders);
 
   const [stateName, setStateName] = useState("");
 
@@ -54,12 +58,32 @@ const CustomerChooseState = () => {
         fullWidth
         className={classes.input}
         disabled={!stateName}
-        variant="outlined"
+        variant="contained"
         color="secondary"
         onClick={() => history.push(`/customer/${stateName.toLowerCase()}`)}
       >
         Continue
       </Button>
+      {/* {status === "success" ? (
+        <>
+          <Typography variant="h6" align="center" className={classes.input}>
+            Total Riders in Yangon :{" "}
+            <strong>
+              {data.filter((item) => item.state === "Yangon").length}
+            </strong>{" "}
+            riders
+          </Typography>
+          <Typography variant="h6" align="center">
+            Total Riders in Mandalay :{" "}
+            <strong>
+              {data.filter((item) => item.state === "Mandalay").length}
+            </strong>{" "}
+            riders
+          </Typography>
+        </>
+      ) : (
+        <Spinner />
+      )} */}
     </Box>
   );
 };
