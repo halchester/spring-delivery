@@ -10,8 +10,9 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "./api/query";
 
 import firebase from "firebase/app";
+import "firebase/firebase-analytics";
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBNcNDNkPrbB3iR12HJb9Td19NvjmqzLJ4",
   authDomain: "spring-delivery-92316.firebaseapp.com",
   projectId: "spring-delivery-92316",
@@ -22,16 +23,16 @@ export const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-// analysis(firebaseConfig);
+firebase.analytics();
 
-let firebaseAnalytics;
-export async function initFirebaseAnalytics() {
-  if (!firebaseAnalytics) {
-    await require("firebase/analytics");
-    firebaseAnalytics = await firebase.analytics();
-  }
-  return firebaseAnalytics;
-}
+// let firebaseAnalytics;
+// export async function initFirebaseAnalytics() {
+//   if (!firebaseAnalytics) {
+//     await require("firebase/analytics");
+//     firebaseAnalytics = await firebase.analytics();
+//   }
+//   return firebaseAnalytics;
+// }
 
 ReactDOM.render(
   <React.StrictMode>
