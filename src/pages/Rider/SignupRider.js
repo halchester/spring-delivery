@@ -14,7 +14,12 @@ import axios from "../../api/index";
 import Spinner from "../../utils/Spinner/Spinner";
 import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
-import { riderSignUpValidation } from "../../utils/formValidation/index";
+import {
+  checkFileSize,
+  checkMimeType,
+  maxSelectedFile,
+  riderSignUpValidation,
+} from "../../utils/formValidation/index";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -48,6 +53,7 @@ const SignupRider = () => {
 
   // For image
   const [imageURL, setImageURL] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const addNewShopHandler = (e) => {
     e.preventDefault();
@@ -69,13 +75,22 @@ const SignupRider = () => {
   const imageUploadHandler = (e) => {
     e.preventDefault();
     setPicLoading(true);
-    const image = e.target.files[0];
-    const data = new FormData();
-    data.append("file", image);
-    axios.post("/api/rider/upload", data).then((response) => {
+    if (maxSelectedFile(e) && checkMimeType(e) && checkFileSize(e)) {
+      const image = e.target.files[0];
+      const data = new FormData();
+      data.append("file", image);
+      axios.post("/api/rider/upload", data).then((response) => {
+        console.log(response.data);
+        setErrorMessage("");
+        setPicLoading(false);
+        setImageURL(response.data.data);
+      });
+    } else {
       setPicLoading(false);
-      setImageURL(response.data.data);
-    });
+      setErrorMessage(
+        "ဓါတ်ပုံ ၁ ပုံကိုပဲရွေးပါ ရွေးသောဓါတ်ပုံ file size ကြီးလို့မရပါ"
+      );
+    }
   };
 
   const formikInitialValues = {
@@ -219,6 +234,17 @@ const SignupRider = () => {
                 ဓါတ်ပုံတင်မည်
               </Button>
             </label>
+            {errorMessage && (
+              <Typography
+                className={classes.input}
+                variant="h6"
+                color="secondary"
+                gutterBottom
+              >
+                {errorMessage}
+              </Typography>
+            )}
+
             <Typography className={classes.input} variant="h6" gutterBottom>
               မိမိပို့ဆောင်နိုင်မည့် မြို့နယ်များကို ၁ ခုချင်းရွေးချယ်ပါ
             </Typography>

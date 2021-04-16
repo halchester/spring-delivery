@@ -32,3 +32,31 @@ export const checkMimeType = (event) => {
   }
   return true;
 };
+
+export const maxSelectedFile = (e) => {
+  let files = e.target.files;
+  if (files.length > 1) {
+    const msg = "Only 1 image can be uploaded at a time";
+    e.target.value = null;
+    console.log(msg);
+    return false;
+  }
+  return true;
+};
+
+export const checkFileSize = (event) => {
+  let files = event.target.files[0];
+  let size = 2000000;
+  let err = "";
+  if (files.size > size) {
+    err += files.type + "is too large, please pick a smaller file\n";
+  }
+
+  if (err !== "") {
+    event.target.value = null;
+    console.log(err);
+    return false;
+  }
+
+  return true;
+};
