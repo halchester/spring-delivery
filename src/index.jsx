@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "./theme";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClientProvider } from "react-query";
-import { queryClient } from "./api/query";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import { ThemeProvider } from '@material-ui/core';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClientProvider } from 'react-query';
+import firebase from 'firebase/app';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import theme from './theme';
+import { queryClient } from './api/query';
 
-import firebase from "firebase/app";
-import "firebase/firebase-analytics";
+import 'firebase/firebase-analytics';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBNcNDNkPrbB3iR12HJb9Td19NvjmqzLJ4',
@@ -44,7 +44,7 @@ ReactDOM.render(
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
