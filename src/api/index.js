@@ -4,5 +4,5 @@ import axios from 'axios';
 const apiEndPoint = 'https://spring-snacks.herokuapp.com/';
 
 export default axios.create({
-	baseURL: apiEndPoint,
+  baseURL: apiEndPoint,
 });
