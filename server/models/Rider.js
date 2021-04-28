@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-const shortid = require("shortid");
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const shortid = require('shortid');
+
+const { Schema } = mongoose;
 
 const RiderModel = mongoose.Schema({
   name: {
@@ -39,10 +40,10 @@ const RiderModel = mongoose.Schema({
   },
 });
 
-RiderModel.pre("save", async function (next) {
-  //generate a unique short code
+RiderModel.pre('save', async function (next) {
+  // generate a unique short code
   this.uniqueId = await shortid.generate();
   next();
 });
 
-module.exports = mongoose.model("Rider", RiderModel);
+module.exports = mongoose.model('Rider', RiderModel);
