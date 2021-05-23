@@ -9,6 +9,7 @@ import {
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import Masonry from 'react-masonry-css';
 import { getAllRiders } from '../../api/query';
 import PersonCard from '../../components/PersonCard';
 import Spinner from '../../utils/Spinner/Spinner';
@@ -25,6 +26,12 @@ const useStyle = makeStyles({
     marginBottom: '1rem',
   },
 });
+
+const breakpoints = {
+  default: 3,
+  1100: 2,
+  700: 1,
+};
 
 const CustomerByState = (props) => {
   const classes = useStyle();
@@ -100,23 +107,36 @@ const CustomerByState = (props) => {
           </Typography>
         </>
         ) : (
-          <Grid container spacing={2} className={classes.bodyContainer}>
+          <Masonry
+            breakpointCols={breakpoints}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {query
               ? searchTownship(data, query)
                 .filter((data) => data.state.toLowerCase() === stateName)
                 .map((person) => (
-                  <Grid item xs={12} sm={12} md={6} lg={4} key={person.uniqueId}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    lg={4}
+                    key={person.uniqueId}
+                  >
                     <PersonCard person={person} />
                   </Grid>
                 ))
               : data
                 .filter((data) => data.state.toLowerCase() === stateName)
                 .map((person) => (
-                  <Grid item xs={12} sm={12} md={6} lg={4} key={person.uniqueId}>
+                  <div
+                    key={person.uniqueId}
+                  >
                     <PersonCard person={person} />
-                  </Grid>
+                  </div>
                 ))}
-          </Grid>
+          </Masonry>
         )}
 
       {query ? (
