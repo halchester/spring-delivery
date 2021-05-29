@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const cloudinary = require('cloudinary').v2;
 // const multer = require('multer');
 const Rider = require('../models/Rider');
@@ -59,7 +60,23 @@ exports.deleteRider = async (req, res) => {
     .then((response) => res.status(200).json({ success: true, data: response }))
     .catch((err) => res.status(200).json({ success: false, data: err }));
 };
+exports.getAllRiderByState = async (req, res) => {
+  const { state } = req.params;
 
+  await Rider.find().then((response) => {
+    const newOne = response.filter(
+      (rider) => rider.state.toLowerCase() === state.toLowerCase(),
+    );
+    if (newOne.length === 0) {
+      return res
+        .status(400)
+        .json({ success: false, data: [], error: 'Something went wrong' });
+    }
+    return res.status(200).json({ success: true, data: newOne, error: null });
+  });
+
+  // res.send('hi');
+};
 exports.editRider = async (req, res) => {
   const { id } = req.params;
   await Rider.updateOne(

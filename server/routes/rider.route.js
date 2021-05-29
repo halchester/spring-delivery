@@ -22,6 +22,7 @@ const uploadStore = multer({
 router.post('/api/rider', riderController.registerNewRider);
 router.get('/api/riders', riderController.getAllRiders);
 router.get('/api/rider/:id', riderController.getOneRider);
+router.get('/api/riders/:state', riderController.getAllRiderByState);
 router.delete('/api/rider/:id', riderController.deleteRider);
 router.put('/api/rider/:id', riderController.editRider);
 router.post(
