@@ -5,12 +5,14 @@ import {
   Card,
   CardHeader,
   Chip,
+  Divider,
   Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core';
 import { useQuery } from 'react-query';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import Masonry from 'react-masonry-css';
 import { getOneRider } from '../../api/query';
 import Spinner from '../../utils/Spinner/Spinner';
 
@@ -19,7 +21,7 @@ const useStyle = makeStyles((theme) => ({
     marginTop: '2rem',
   },
   cardContainer: {
-    padding: '0.5rem',
+    padding: '0rem',
   },
   chip: {
     margin: theme.spacing(0.3),
@@ -31,6 +33,12 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: 'space-around',
   },
 }));
+
+const breakpoints = {
+  default: 3,
+  1100: 2,
+  700: 1,
+};
 
 const RiderDetail = (props) => {
   const { id } = props.match.params;
@@ -53,16 +61,20 @@ const RiderDetail = (props) => {
       <Typography style={{ marginTop: '1rem' }} gutterBottom>
         {data.detail}
       </Typography>
-      <Typography gutterBottom variant="h5">
+      <p className="text-lg font-bold">
         Delivery fees :
         {' '}
         <strong style={{ color: '#ce1212' }}>{data.expectedMoney}</strong>
-      </Typography>
-      <hr />
+      </p>
 
-      <Typography variant="body2" align="center" gutterBottom>
-        <strong>Available Shops and Delivery &nbsp; &#8595; </strong>
-      </Typography>
+      <Divider />
+
+      <div className="my-4">
+        <Typography variant="h5" align="center">
+          <strong>Available Shops and Delivery &nbsp; &#8595; </strong>
+        </Typography>
+      </div>
+
       <Typography variant="h5" gutterBottom>
         <strong>
           {data.township.map((item) => (
@@ -77,18 +89,26 @@ const RiderDetail = (props) => {
         </strong>
       </Typography>
       <Box>
-        <Grid container spacing={2}>
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
           {data.availableShops.map((shop) => (
-            <Grid item xs={12} sm={6} md={6} lg={4} key={shop.name}>
+            <Grid key={shop.name}>
               <Card className={classes.cardContainer}>
                 <CardHeader
-                  title={shop.name}
-                  subheader={shop.detail ? shop.detail : ''}
+                  title={<p className="text-lg font-semibold">{shop.name}</p>}
+                  subheader={(
+                    <p className="text-gray-500 text-sm mt-2">
+                      {shop?.detail ? shop.detail : null}
+                    </p>
+                  )}
                 />
               </Card>
             </Grid>
           ))}
-        </Grid>
+        </Masonry>
       </Box>
     </Box>
   ) : (
